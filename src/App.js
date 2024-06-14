@@ -19,7 +19,7 @@ function App() {
   const toilets = useStoreActions((actions) => actions.toilets);
   
   const location = useGeoLocation();
-  const URL = "http://localhost:5000/api/ownapi"
+  const URL = "*/api/ownapi"
   const { data, isLoading, fetchError } = useAxiosFetch(URL, location.coordinates);
 
   const { isLoaded } = useLoadScript({

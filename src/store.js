@@ -2,7 +2,7 @@ import { createStore, action, thunk, computed } from "easy-peasy";
 import axios from 'axios';
 import qs from 'qs';
 
-const URL = "http://localhost:5000/api/ownapi"
+const URL = "*/api/ownapi"
 
 export default createStore({
     toilets: [],
