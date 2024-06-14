@@ -1,13 +1,254 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+*{
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  font-size: 22px;
+}
+
+body {
+  min-height: 100vh;
+  min-width: 100vw;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #efefef;
+}
+
+.App {
+  height: 100%;
+  width: 100%;
+}
+
+.Header {
+  width: 100%;
+  height: 10vh;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Header h1 {
+  font-weight: bold;
+}
+
+.Header svg {
+  font-size: 2.5rem;
+}
+
+.formContainer {
+  margin: 0 0.5rem 0 0.5rem;
+  padding: 0;
+}
+
+.placeForm {
+  position: relative;
+  display: flex;
+  width: 50%;
+  min-width: 400px;
+  justify-content: space-between;
+  align-items: center;
+  border: 5px solid rgb(189, 106, 106);
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+
+.selectForm {
+  display: flex;
+  align-items: center;
+}
+
+#countryForm, #cityForm, #villageForm {
+  margin-right: 0.35rem;
+  border-color: hsl(13, 4%, 51%);
+  border-radius: 3px;
+}
+
+#countryForm:hover, 
+#cityForm:hover:hover, 
+#villageForm:hover {
+  cursor: pointer
+}
+
+#countryForm:focus,
+#cityForm:focus, 
+#villageForm:focus {
+  border: 2px solid hsl(13, 4%, 51%);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+
+.formButton {
+  padding: 3px;
+  background-color: hsl(335, 46%, 59%);
+  color: white;
+  border: none;
+  border-radius: 3px;
+}
+
+.formButton:hover {
+  background-color: hsl(335, 46%, 40%);
+  cursor: pointer;
+}
+
+.mapScreenContainer {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;  
+  width: 100vw;
+  height: 90vh;
+}
+
+.markerContainer a{
+  text-decoration: none;
+}
+
+.markers {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 0.1rem solid hsl(335, 55%, 60%);
+  border-radius: 50%;
+  background-color:hsl(0, 100%, 29%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: white;
+  transition: all 0.3s ease-out;
+}
+
+.markers:hover{
+  width: 3rem;
+  height: 3rem;
+  font-size: 2rem;
+  background-color: hsl(335, 55%, 60%);
+  border: 0.2rem solid hsla(289, 89%, 35%, 0.415);
+}
+
+.clickMarker {
+  z-index: 20;
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  border: 0.5rem solid hsl(260, 100%, 73%);
+  border-radius: 50%;
+  background-color:hsl(210, 97%, 62%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: white;
+  transform: translate(-25%, -150%);
+  transition: all 0.3s ease-out;
+}
+
+.notDisplay {
+  display: none;
+}
+
+.infoWindow, .toiletPage  {
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  position: absolute;
+  padding: 1rem;
+  width: 50%;
+  max-width: 500px;
+  height: 80%;
+  bottom: 70px;
+  left: -15px;
+  color: hsl(0, 0%, 0%);
+  background-color: hsla(0, 0%, 100%, 0.993);
+  box-shadow: 0 0 7px hsl(0, 0%, 30%);
+  border-radius: 20px;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.infoWindow h1 {
+  font-size: 1rem;
+}
+
+
+.toilet {
+  margin: 0.6rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 2px solid rgb(158, 157, 255);
+  color: hsl(260, 100%, 73%);
+  border-radius: 20px;
+}
+
+.toiletAddress {
+  font-size: 0.75rem;
+  color: black;
+}
+
+.toilet a{
+  text-decoration: none;
+}
+
+.detailContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.detailPart {
+  display: flex;
+  flex-direction: row;
+  padding: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.string {
+  margin-left: 1rem;
+}
+
+@media (max-width: 800px){
+  .infoWindow, .toiletPage {
+    left: 0;
+    z-index: 10;
+    position: absolute;
+    padding: 1rem;
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 100vw;
+    height: 40vh;
+    bottom: 0px;
+    color: hsl(0, 0%, 0%);
+    background-color: hsla(0, 0%, 100%, 0.993);
+    box-shadow: 0 0 7px hsl(0, 0%, 30%);
+    border-radius: 20px 20px 0 0;
+  }
+  .infoWindow h1 {
+    font-size: 0.5rem;
+  }
+
+  .Header {
+    width: 100%;
+    height: 8vh;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .mapScreenContainer {
+    display: flex;
+    flex-grow: 1;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;  
+    width: 100vw;
+    height: 92vh;
+  }
 }
