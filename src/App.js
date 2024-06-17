@@ -19,7 +19,7 @@ function App() {
   const toilets = useStoreActions((actions) => actions.toilets);
   
   const location = useGeoLocation();
-  const URL = "*/api/ownapi"
+  const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com"
   const { data, isLoading, fetchError } = useAxiosFetch(URL, location.coordinates);
 
   const { isLoaded } = useLoadScript({

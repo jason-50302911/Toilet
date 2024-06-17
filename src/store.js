@@ -2,7 +2,7 @@ import { createStore, action, thunk, computed } from "easy-peasy";
 import axios from 'axios';
 import qs from 'qs';
 
-const URL = "*/api/ownapi"
+const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com/"
 
 export default createStore({
     toilets: [],

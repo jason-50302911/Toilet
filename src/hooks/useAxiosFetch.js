@@ -22,8 +22,6 @@ const useAxiosFetch = (dataUrl, location) => {
                     }
                 })
                 if (isMounted) {
-                    const count = Object.keys(response.data).length
-                    console.log(count);
                     setData(response.data);
                     setFetchError(null);
                 }
