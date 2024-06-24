@@ -192,6 +192,7 @@ body {
   background-color: hsl(350, 55%, 68%);
   border-radius: 5px;
   font-weight: bold;
+  color: white;
   transition: all 0.3s ease-out;
 }
 
@@ -326,6 +327,7 @@ body {
     background-color: hsl(350, 55%, 68%);
     border-radius: 5px;
     font-weight: bold;
+    color: white;
     transition: all 0.3s ease-out;
   }
   .btn {
