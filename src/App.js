@@ -20,8 +20,8 @@ function App() {
   const toilets = useStoreActions((actions) => actions.toilets);
   
   const location = useGeoLocation();
-  // const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com";
-  const URL = "http://127.0.0.1:5000";
+  const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com";
+  // const URL = "http://127.0.0.1:5000";
   const { data, isLoading, fetchError } = useAxiosFetch(URL, location.coordinates);
 
   const { isLoaded } = useLoadScript({
