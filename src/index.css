@@ -26,7 +26,7 @@ body {
 
 .Header {
   width: 100%;
-  height: 10vh;
+  height: 10%;
   padding: 0.5rem;
   display: flex;
   justify-content: space-between;
@@ -39,62 +39,6 @@ body {
 
 .Header svg {
   font-size: 2.5rem;
-}
-
-.formContainer {
-  margin: 0 0.5rem 0 0.5rem;
-  padding: 0;
-}
-
-.placeForm {
-  position: relative;
-  display: flex;
-  width: 50%;
-  min-width: 400px;
-  justify-content: space-between;
-  align-items: center;
-  border: 5px solid rgb(189, 106, 106);
-  border-radius: 10px;
-  padding: 0.5rem;
-}
-
-.selectForm {
-  display: flex;
-  align-items: center;
-}
-
-#countryForm, #cityForm, #villageForm {
-  margin-right: 0.35rem;
-  border-color: hsl(13, 4%, 51%);
-  border-radius: 3px;
-}
-
-#countryForm:hover, 
-#cityForm:hover:hover, 
-#villageForm:hover {
-  cursor: pointer
-}
-
-#countryForm:focus,
-#cityForm:focus, 
-#villageForm:focus {
-  border: 2px solid hsl(13, 4%, 51%);
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-
-.formButton {
-  padding: 3px;
-  background-color: hsl(335, 46%, 59%);
-  color: white;
-  border: none;
-  border-radius: 3px;
-}
-
-.formButton:hover {
-  background-color: hsl(335, 46%, 40%);
-  cursor: pointer;
 }
 
 .mapScreenContainer {
@@ -213,6 +157,100 @@ body {
   margin-left: 1rem;
 }
 
+.selectForm {
+  z-index: 10;
+  position: absolute;
+  padding: 0.5rem;
+  width: 60%;
+  max-width: 250px;
+  height: 70%;
+  top: 200px;
+  right: 0px;
+  background-color: transparent;
+  overflow-y: auto;
+}
+
+.buttonGroup {
+  list-style-type: none;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.nonDisplay{
+  font-size: 0rem;
+  color: transparent;
+}
+
+.displayWord {
+  font-size: 0.9rem;
+  margin-right: 0.7rem;
+  padding: 0.3rem;
+  background-color: hsl(350, 55%, 68%);
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s ease-out;
+}
+
+.selectContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.btn {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  font-size: 2rem;
+  font-weight: bold;
+  background-color: hsl(0, 100%, 76%);
+  border: 6px solid hsl(25, 63%, 48%);
+  border-radius: 40%;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+}
+
+.btnFocus {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  color: whitesmoke;
+  font-size: 2rem;
+  font-weight: bold;
+  background-color: hsl(212, 100%, 37%);
+  border: 6px solid hsl(242, 100%, 72%);
+  border-radius: 40%;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+}
+
+/* .btnFocus:hover {
+  background-color: hsl(212, 100%, 37%);
+  border: 6px solid hsl(242, 100%, 72%);
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.btn:hover {
+  background-color: hsl(26, 57%, 74%);
+  border: 6px solid rgb(232, 128, 128);
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+} */
+
+
 @media (max-width: 800px){
   .infoWindow, .toiletPage {
     left: 0;
@@ -250,5 +288,76 @@ body {
     align-items: center;  
     width: 100vw;
     height: 92vh;
+  }
+
+  .selectForm {
+    z-index: 10;
+    position: absolute;
+    padding: 0.5rem;
+    width: 80%;
+    min-width: 375px;
+    height: 20%;
+    top:  calc(100vh - 90vh - 10px);
+    right: calc((100% - 375px) / 2);
+    background-color: transparent;
+    overflow-x: auto;
+  }
+
+  .buttonGroup {
+    list-style-type: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-start;
+    flex-direction: row;
+  }
+
+  .selectContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .displayWord {
+    font-size: 0.65rem;
+    margin: 0.3rem;
+    padding: 0.3rem;
+    background-color: hsl(350, 55%, 68%);
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease-out;
+  }
+  .btn {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: hsl(0, 100%, 76%);
+    border: 3px solid hsl(25, 63%, 48%);
+    border-radius: 40%;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+  }
+  
+  .btnFocus {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    color: whitesmoke;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: hsl(212, 100%, 37%);
+    border: 3px solid hsl(242, 100%, 72%);
+    border-radius: 40%;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
   }
 }

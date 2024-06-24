@@ -11,6 +11,7 @@ import Discuss from './Discuss';
 import Map from "./Maps";
 import Home from './Home';
 import ToiletPage from './ToiletPage';
+import SelectForm from "./SelectTypeForm";
 
 function App() {
   const setToilets = useStoreActions((actions) => actions.setToilets);
@@ -19,7 +20,8 @@ function App() {
   const toilets = useStoreActions((actions) => actions.toilets);
   
   const location = useGeoLocation();
-  const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com"
+  // const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com";
+  const URL = "http://127.0.0.1:5000";
   const { data, isLoading, fetchError } = useAxiosFetch(URL, location.coordinates);
 
   const { isLoaded } = useLoadScript({
@@ -37,6 +39,7 @@ function App() {
   return (
     <div className="App">
       <Header webTitle="Eazy Toilet"/>
+      <SelectForm/>
       <Map isLoaded={isLoaded}/>
       <Routes>
         <Route path="/" element={<Home/>}/>

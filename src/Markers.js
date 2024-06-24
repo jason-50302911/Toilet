@@ -3,10 +3,9 @@ import {
     AdvancedMarker
   } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
-import { FaRestroom } from "react-icons/fa";
 import { useStoreActions } from 'easy-peasy';
 import { useStoreState } from "easy-peasy";
+import MarkerIcon from "./MarkerIcon";
 
 const Markers = () => {
     const map = useMap();
@@ -15,18 +14,37 @@ const Markers = () => {
 
     const toilets = useStoreState((state) => state.toilets);
     const display = useStoreState((state) => state.display);
+    const type = useStoreState((state) => state.type);
 
     const findingSearchId = useStoreActions((actions) => actions.findingSearchId);
 
     useEffect(() => {
-      setRenderToilets(toilets);
-    }, [toilets, setRenderToilets]);
+      let cpToilet = [...toilets];
+      cpToilet.forEach((toilet) => {
+        const categroy = toilet.categroy;
+        const filtered = categroy.filter((idType) =>  !(type.includes(String(idType.type))));
+        if (filtered.length === 0) {
+          const filterToilets = cpToilet.filter((refToilet) =>  refToilet.uuid !== toilet.uuid);
+          cpToilet = [...filterToilets];
+        } else {
+          toilet.categroy = [...filtered];
+        }
+      });
+      setRenderToilets(cpToilet);
+    }, [toilets, setRenderToilets, type]);
+
+    const idParser = (point) => {
+      const emptyArray = [];
+      point.categroy.map((idInfo) => emptyArray.push(idInfo.id));
+      return emptyArray;
+    }
 
     const handleClick = (point) => {
+      const idArray = idParser(point);
       setClickNumber(point.uuid);
       map.panTo({ lat: parseFloat(point.lat + 0.01), lng: parseFloat(point.lng) });
       map.setZoom(17.5);
-      findingSearchId(point.id);
+      findingSearchId(idArray);
     };
   
     return (
@@ -38,20 +56,11 @@ const Markers = () => {
                       className={display ? "markerContainer" : "notDisplay"}
                       key={point.uuid}
                       id={point.uuid}
-                      // ref={(marker) => setMarkerRef(marker, point.key)}
                       onClick={() => handleClick(point)}> 
-                      <Link to={`/place/${point.uuid}`}>
-                      { point.id.length === 1 ? (
-                        <span className={clickNumber === point.uuid ? "clickMarker": "markers"}>
-                          <FaRestroom />
-                        </span>) : 
-                        (
-                          <span className={clickNumber === point.uuid ? "clickMarker": "markers"}>
-                            {point.id.length}
-                          </span>
-                        )
-                      }
-                      </Link>
+                      <MarkerIcon
+                        point={point}
+                        clickNumber={clickNumber}>
+                      </MarkerIcon>
                     </AdvancedMarker>
                 )
             ))}

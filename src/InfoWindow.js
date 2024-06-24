@@ -8,11 +8,11 @@ const InfoWindow = () => {
     return (
         <>
             { searchResult.length !== 0 &&
-                <main className="infoWindow">
+                <div className="infoWindow">
                     {(searchResult.map((toilet) => (
                         <Toilet key={toilet.number} toilet={toilet}/>
                     )))}
-                </main>
+                </div>
             }
         </>
 

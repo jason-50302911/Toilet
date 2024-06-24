@@ -1,4 +1,4 @@
-import { APIProvider, Map} from '@vis.gl/react-google-maps';
+import { APIProvider, Map } from '@vis.gl/react-google-maps';
 import { useEffect, useState, useMemo } from "react";
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import Markers from './Markers';

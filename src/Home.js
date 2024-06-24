@@ -1,5 +1,4 @@
 
-
 const Home = () => {
   return (
     <main className="Home">
