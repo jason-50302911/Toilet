@@ -22,8 +22,8 @@ function App() {
   const setToilets = useStoreActions((actions) => actions.setToilets);
   const setNowCenter = useStoreActions((actions) => actions.setNowCenter);
 
-  const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com";
-  // const URL = "http://192.168.100.169:5000"
+  // const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com";
+  const URL = "http://192.168.100.169:5000"
 
   const { data, isLoading, fetchError } = useAxiosFetch(URL, nowCenter);
   const location = useGeoLocation();
