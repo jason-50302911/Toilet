@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
-import useAxiosFetch from './hooks/useAxiosFetch';
 import { useStoreState, useStoreActions } from "easy-peasy";
 import { Routes, Route } from 'react-router-dom';
 
 import Header from './Header';
+import useAxiosFetch from './hooks/useAxiosFetch';
 import useGeoLocation from './hooks/useGeoLocation';
+import useLiff from './hooks/useLiff';
 import InfoWindow from './InfoWindow';
 import Discuss from './Discuss';
 import Map from "./Maps";
@@ -13,18 +14,19 @@ import ToiletPage from './ToiletPage';
 import SelectForm from "./SelectTypeForm";
 
 
+
 function App() {
   const nowCenter = useStoreState((state) => state.nowCenter);
   const mode = useStoreState((state) => state.mode);
   
   const setToilets = useStoreActions((actions) => actions.setToilets);
   const setNowCenter = useStoreActions((actions) => actions.setNowCenter);
-  
-  const location = useGeoLocation();
 
   const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com";
 
   const { data, isLoading, fetchError } = useAxiosFetch(URL, nowCenter);
+  const location = useGeoLocation();
+  const { liffObject, liffError } = useLiff();
 
   useEffect(() => {
     if (mode === 'detect'){

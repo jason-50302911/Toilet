@@ -102,7 +102,7 @@ body {
 .infoContainer {
   position: absolute;
   width: 50%;
-  max-width: 500px;
+  max-width: 650px;
   height: 80%;
   bottom: 45px;
   left: 0px;
@@ -115,7 +115,7 @@ body {
   position: absolute;
   margin: 0;
   width: 100%;
-  max-width: 500px;
+  max-width: 650px;
   height: 100%;
   bottom: 20px;
   left: 0px;
@@ -374,10 +374,10 @@ body {
     position: absolute;
     box-shadow: 0 0 7px hsl(0, 0%, 30%);
     min-width: 100vw;
-    height: 45vh;
+    height: 45.4vh;
     bottom: 0px;
     left: 0px;
-    background-color: hsl(180, 38%, 56%);
+    background-color: hsl(180, 45%, 65%);
     border-radius: 20px 20px 0 0;
   }
 
@@ -392,6 +392,7 @@ body {
     color: hsl(0, 0%, 100%);
     box-shadow: none;
     border-radius: none;
+    background-color: hsl(180, 45%, 65%);
     padding: 0.3rem 0.7rem 0.3rem 0.7rem;
   }
 
@@ -452,13 +453,14 @@ body {
     box-shadow: none;
     z-index: 11;
     position: absolute;
-    bottom: 42.5vh;
-    left: 50%;
-    height: 10px;
+    bottom: 42vh;
+    left: calc(50% - 50px);
+    width: 100px;
+    height: 7px;
     background-color: transparent;
     display: flex; 
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     font-size: 1.2rem;
     color: whitesmoke;
     border-radius: 10px 10px 0px 0;
@@ -490,6 +492,17 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .Header img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .Header h1 {
+    font-weight: bold;
+    font-size:1.5rem;
+    color: white;
   }
 
   .mapScreenContainer {
