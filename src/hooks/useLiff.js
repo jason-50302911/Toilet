@@ -10,10 +10,8 @@ const useLiff = () => {
         .init({ liffId: process.env.REACT_APP_LIFF_ID })
         .then(() => setLiffObject(liff))
         .catch((error) => setLiffError(error.toString));
-
-        console.log(process.env.REACT_APP_LIFF_ID, liffObject);
     }, []);
-
+    
     return ({ liffObject, liffError });
 }
 

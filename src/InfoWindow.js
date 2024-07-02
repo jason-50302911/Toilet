@@ -6,7 +6,7 @@ import { FaRestroom, FaAngleLeft, FaAngleDown, FaAngleRight, FaAngleUp } from 'r
 import useWindowSize from './hooks/useWindowSize';
 
 
-const InfoWindow = () => {
+const InfoWindow = ({ liffObject }) => {
     const searchResult = useStoreState((state) => state.searchResult);
     const renderToilets = useStoreState((state) => state.renderToilets);
     const clickNumber = useStoreState((state) => state.clickNumber);
@@ -79,6 +79,13 @@ const InfoWindow = () => {
         };
     }
 
+    const handleLiff = () => {
+        liffObject.sendMessages([{
+            type: "text",
+            text: "Hello from line liff web",
+        }, ]);
+    }
+
 
     return (
         <>
@@ -95,6 +102,9 @@ const InfoWindow = () => {
                                 <h2>{toiletName}</h2>
                                 <p>{toiletAddress}</p>
                                 <p>開放時間: {week[day]}  8:00 - 17:00</p>
+                                <button onClick={handleLiff}>
+                                    Click Me
+                                </button>
                             </div>
                             <div className="floorBtnContainer">
                                 {floorList.map((floor) => (

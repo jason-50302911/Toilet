@@ -377,7 +377,7 @@ body {
     height: 45.4vh;
     bottom: 0px;
     left: 0px;
-    background-color: hsl(180, 45%, 65%);
+    background-color: hsl(180, 45%, 60%);
     border-radius: 20px 20px 0 0;
   }
 
@@ -392,7 +392,7 @@ body {
     color: hsl(0, 0%, 100%);
     box-shadow: none;
     border-radius: none;
-    background-color: hsl(180, 45%, 65%);
+    background-color: hsl(180, 45%, 60%);
     padding: 0.3rem 0.7rem 0.3rem 0.7rem;
   }
 
