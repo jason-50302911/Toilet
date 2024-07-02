@@ -9,6 +9,7 @@ const useLiff = () => {
         const initLiff = async () => {
             try {
                 await liff.init({ liffId: process.env.REACT_APP_LIFF_ID });
+                console.log(liff.isLoggedIn());
                 if (liff.isLoggedIn()){
                     const profile = await liff.getProfile();
                     console.log(profile);
