@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import useAxiosFetch from './hooks/useAxiosFetch';
-import { useStoreActions } from 'easy-peasy';
-import { useLoadScript } from '@react-google-maps/api';
+import { useStoreState, useStoreActions } from "easy-peasy";
 import { Routes, Route } from 'react-router-dom';
 
 import Header from './Header';
@@ -13,24 +12,25 @@ import Home from './Home';
 import ToiletPage from './ToiletPage';
 import SelectForm from "./SelectTypeForm";
 
-function App() {
-  const setToilets = useStoreActions((actions) => actions.setToilets);
-  const setNowLocation = useStoreActions((actions) => actions.setNowLocation);
 
-  const toilets = useStoreActions((actions) => actions.toilets);
+function App() {
+  const nowCenter = useStoreState((state) => state.nowCenter);
+  const mode = useStoreState((state) => state.mode);
+  
+  const setToilets = useStoreActions((actions) => actions.setToilets);
+  const setNowCenter = useStoreActions((actions) => actions.setNowCenter);
   
   const location = useGeoLocation();
-  const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com";
-  // const URL = "http://127.0.0.1:5000";
-  const { data, isLoading, fetchError } = useAxiosFetch(URL, location.coordinates);
 
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-  })
+  const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com";
+
+  const { data, isLoading, fetchError } = useAxiosFetch(URL, nowCenter);
 
   useEffect(() => {
-    setNowLocation(location.coordinates)
-  }, [location, setNowLocation]);
+    if (mode === 'detect'){
+      setNowCenter(location.coordinates);
+    }
+  }, [location, setNowCenter, mode]);
 
   useEffect(() => {
     setToilets(data);
@@ -40,7 +40,7 @@ function App() {
     <div className="App">
       <Header webTitle="Eazy Toilet"/>
       <SelectForm/>
-      <Map isLoaded={isLoaded}/>
+      <Map/>
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/place/:id" element={<InfoWindow/>}/>

@@ -1,58 +1,46 @@
 import { APIProvider, Map } from '@vis.gl/react-google-maps';
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import Markers from './Markers';
+import _ from 'lodash';
 
-
-const Maps = ({ isLoaded })  => {
-
+const Maps = ()  => {
     const [center, setCenter] = useState(null);
-    const [nowCenter, setNowCenter] = useState(null);
-
-    const [renderToilet, setRenderToilet] = useState(null);
 
     const defaultZoomLevel = 17;
     
-    const nowLocation = useStoreState((state) => state.nowLocation);
-    const toilets = useStoreState((state) => state.toilets);
+    const nowCenter = useStoreState((state) => state.nowCenter);
+    const mode = useStoreState((state) => state.mode);
 
     const setDisplay = useStoreActions((actions) => actions.setDisplay);
-    const findAroundToliets = useStoreActions((actions) => actions.findAroundToilets);
+    const setNowCenter = useStoreActions((actions) => actions.setNowCenter);
+    const setMode = useStoreActions((actions) => actions.setMode);
 
-    // const options = useMemo(
-    //     () => ({
-    //       mapId: process.env.REACT_APP_MAPID,
-    //       disableDefaultUI: true,
-    //       clickableIcons: false
-    //     }), []);
+    const debounce = _.debounce((_changeCenter) => {
+        setNowCenter(_changeCenter); 
+      }, 500);
 
     useEffect(() => {
-      setRenderToilet(toilets);
-    }, [toilets, setRenderToilet])
-        
-    useEffect(() => {
-      setCenter(nowLocation);
-      setNowCenter(nowLocation);
-    }, [nowLocation, setCenter, setNowCenter]);
-
-    const handleZoomChange = (event) => {
-      const zoomSize = event.detail.zoom;
-      if (zoomSize < 15) setDisplay(false);
-      else setDisplay(true);
-    }
+      if (mode === "detect") {
+        setCenter(nowCenter);
+      }
+    }, [nowCenter, mode]);
 
     const handleCameraChange = (event) => {
       const presentCenter = event.detail.center;
-      if ((Math.abs(presentCenter.lat - nowCenter.lat) > 0.001) || (Math.abs(presentCenter.lng - nowCenter.lng) > 0.001)){
-        setNowCenter(presentCenter);
-        findAroundToliets(presentCenter);
+      const zoomSize = event.detail.zoom;
+      if (zoomSize > 13) {
+        debounce(presentCenter);
+        setMode('Moving');
       }
+      if (zoomSize < 13) setDisplay(false);
+      else setDisplay(true);
     }
 
 
     return (
-        <>
-        {isLoaded && center != null ? (
+      <>
+        {center != null ? (
           <div className="mapScreenContainer">
             <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
                 <Map
@@ -61,9 +49,8 @@ const Maps = ({ isLoaded })  => {
                     mapId={"49ae42fed52588c3"}
                     disableDefaultUI={"true"}
                     mapTypeId={"roadmap"}
-                    onZoomChanged={event => handleZoomChange(event)}
                     onCameraChanged={event => handleCameraChange(event)}>
-                    <Markers points={renderToilet}/>
+                    <Markers/>
                 </Map>
               </APIProvider>
           </div>

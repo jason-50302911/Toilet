@@ -1,35 +1,40 @@
 import { useState } from 'react'
 import { FaRestroom } from "react-icons/fa";
 import { useStoreActions, useStoreState } from "easy-peasy";
+import useWindowSize from './hooks/useWindowSize';
 
 const SelectTypeForm = () => {
     const [word, setWord] = useState('');
-    const [clickNumber, setClickNumber] = useState([]);
+    const [clickTypeNumber, setClickTypeNumber] = useState([]);
+
+    const { width } = useWindowSize();
+
     const type = useStoreState((state) => state.type);
     const setType = useStoreActions((actions) => actions.setType);
 
+
     const toiletType = {
-        1: "親子廁所",
-        2: "男廁所",
-        3: "女廁所",
+        1: "男廁所",
+        2: "女廁所",
+        3: "親子廁所",
         4: "無障礙廁所", 
         5: "性別友善廁所",
         6: "混合廁所",
     };
+    
 
-    const handleClick = (number) => {
+    const handleBtnClick = (number) => {
         let typeList = [];
         let newClickList = [];
-
-        if (clickNumber.includes(number)) {
-            newClickList = clickNumber.filter((clicked) => clicked !== number);
+        if (clickTypeNumber.includes(number)) {
+            newClickList = clickTypeNumber.filter((clicked) => clicked !== number);
             typeList =  type.filter((typeNumber) => typeNumber !== number);
         } else  {
-            if (clickNumber.length >= 5) return;
-            newClickList = [...clickNumber, number];
+            if (clickTypeNumber.length >= 5) return;
+            newClickList = [...clickTypeNumber, number];
             typeList = [...type, number];
         };
-        setClickNumber(newClickList);
+        setClickTypeNumber(newClickList);
         setType(typeList);
     }
 
@@ -40,17 +45,18 @@ const SelectTypeForm = () => {
                     <li 
                         key={number}
                         id={type}
+                        onMouseOut={() => setWord('')}
+                        onMouseOver={() => setWord(number)}
                         className="selectContainer">
-                        <p className={number === word ? "displayWord" : "nonDisplay"}>{type}</p>
+                        { width > 800 && <p className={number === word ? "displayWord" : "nonDisplay"}>{type}</p>}
                         <button 
-                            className={clickNumber.includes(number) ? "btnFocus" : "btn"}
-                            onMouseOver={() => setWord(number)}
-                            onMouseOut={() => setWord('')}
-                            onClick={() => handleClick(number)}
+                            className={clickTypeNumber.includes(number) ? "btnFocus" : "btn"}
+                            onClick={() => handleBtnClick(number)}
                         ><FaRestroom/></button>
                     </li>))
                 }
             </ul>
+            { width <= 800 && <p className={word ? "displayAsideWord" : "nonAsideDisplay"}>{toiletType[word]}</p>}
         </nav>
     )
 }

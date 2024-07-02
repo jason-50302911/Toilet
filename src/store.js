@@ -3,7 +3,6 @@ import axios from 'axios';
 import qs from 'qs';
 
 const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com/";
-// const URL = "http://127.0.0.1:5000";
 
 export default createStore({
     toilets: [],
@@ -14,21 +13,33 @@ export default createStore({
     setType: action((state, payload) => {
         state.type = payload;
     }),
+    clickNumber: null,
+    setClickNumber: action((state, payload) => {
+        state.clickNumber = payload;
+    }),
+    renderToilets: [],
+    setRenderToilets: action((state, payload) => {
+        state.renderToilets = payload;
+    }),
     place: [],
     setPlace: action((state, payload) => {
         state.place = payload;
     }),
-    nowLocation: [],
-    setNowLocation: action((state, payload) => {
-        state.nowLocation = payload;
+    mode: 'detect',
+    setMode: action((state, payload) => {
+        state.mode = payload;
     }),
-    renderCenter: '',
-    setRenderCenter: action((state, payload) => {
-        state.renderCenter = payload;
+    newCenter: null,
+    setNowCenter: action((state, payload) => {
+        state.nowCenter = payload;
     }),
     display: true,
     setDisplay: action((state, payload) => {
         state.display = payload;
+    }),
+    infoWinState: null,
+    setInfoWinState: action((state, payload) => {
+        state.infoWinState = payload;
     }),
     searchResult: [],
     setSearchResult: action((state, payload) => {
@@ -49,21 +60,6 @@ export default createStore({
                 }
             });
             actions.setSearchResult(response.data);
-
-        } catch (err) {
-            console.log(`Error: ${err.message}`);
-        }
-    }), 
-    findAroundToilets: thunk(async(actions, searchCenter, helpers) => {
-        try {
-            const response = await axios.get(URL, {
-                params: {
-                    target: "toilets",
-                    lat: searchCenter.lat,
-                    lng: searchCenter.lng
-                }
-            });
-            actions.setToilets(response.data);
         } catch (err) {
             console.log(`Error: ${err.message}`);
         }
