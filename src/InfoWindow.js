@@ -80,12 +80,16 @@ const InfoWindow = ({ liffObject, liffInfo }) => {
     }
 
     const handleLiff = () => {
-        if (liffInfo) {
+        if (liffObject) {
             liffObject.sendMessages([{
                 type: "text",
-                text: "Successful login",
+                text: "Send Messages",
             }, ]);
         } 
+    }
+
+    const handleLiffClose = () => {
+        if (liffObject) liffObject.closeWindow();
     }
 
 
@@ -104,9 +108,18 @@ const InfoWindow = ({ liffObject, liffInfo }) => {
                                 <h2>{toiletName}</h2>
                                 <p>{toiletAddress}</p>
                                 <p>開放時間: {week[day]}  8:00 - 17:00</p>
-                                <button onClick={handleLiff}>
-                                    Click Me
-                                </button>
+                                <ul>
+                                    <li>
+                                        <button onClick={handleLiff}>
+                                            Send Message
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button onClick={handleLiffClose}>
+                                            Close Window
+                                        </button>
+                                    </li>
+                                </ul>
                             </div>
                             <div className="floorBtnContainer">
                                 {floorList.map((floor) => (
