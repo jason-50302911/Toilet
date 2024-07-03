@@ -6,7 +6,7 @@ import { FaRestroom, FaAngleLeft, FaAngleDown, FaAngleRight, FaAngleUp } from 'r
 import useWindowSize from './hooks/useWindowSize';
 
 
-const InfoWindow = ({ liffObject, liffInfo }) => {
+const InfoWindow = ({ liffObject, location }) => {
     const searchResult = useStoreState((state) => state.searchResult);
     const renderToilets = useStoreState((state) => state.renderToilets);
     const clickNumber = useStoreState((state) => state.clickNumber);
@@ -21,6 +21,7 @@ const InfoWindow = ({ liffObject, liffInfo }) => {
     const [toiletAddress, setToiletAddress] = useState('');
     const [floorList, setFloorList] = useState([]);
     const [displayToilet, setDisplayToilet] = useState([]);
+    const [navURL, setNavURL] = useState(null);
 
     const day = useGetDay();
     const { width } = useWindowSize();
@@ -32,6 +33,8 @@ const InfoWindow = ({ liffObject, liffInfo }) => {
         const numberList = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
         if (clickNumber) {
             const information = renderToilets.find((toilet) => toilet.uuid === clickNumber);
+            const orlat = location.coordinates.lat;
+            const orlng = location.coordinates.lng;
             if (information !== undefined) {
                 const arounding = information["aggregate"];
                 const filterToilet = [];
@@ -46,9 +49,10 @@ const InfoWindow = ({ liffObject, liffInfo }) => {
                 setToiletName(information.name);
                 setToiletAddress(information.address);
                 setDisplayToilet(filterToilet);
+                setNavURL(`https://www.google.com/maps/dir/?api=1&origin=${orlat},${orlng}&destination=${information.lat}, ${information.lng}&travelmode=driving`);
             } else setDisplayToilet([]);
         }
-    }, [renderToilets, clickNumber, clickFloor]);
+    }, [renderToilets, clickNumber, clickFloor, location]);
 
 
     useEffect(() => {
@@ -58,6 +62,7 @@ const InfoWindow = ({ liffObject, liffInfo }) => {
             findingSearchId(idArray);
         }
     }, [displayToilet, findingSearchId]);
+
 
     const handleFloorClick = (floor) => {
         const floorLength = floorList.length;
@@ -85,13 +90,9 @@ const InfoWindow = ({ liffObject, liffInfo }) => {
                 type: "text",
                 text: "Send Messages",
             }, ]);
+            liffObject.closeWindow();
         } 
     }
-
-    const handleLiffClose = () => {
-        if (liffObject) liffObject.closeWindow();
-    }
-
 
     return (
         <>
@@ -108,18 +109,14 @@ const InfoWindow = ({ liffObject, liffInfo }) => {
                                 <h2>{toiletName}</h2>
                                 <p>{toiletAddress}</p>
                                 <p>開放時間: {week[day]}  8:00 - 17:00</p>
-                                <ul>
-                                    <li>
-                                        <button onClick={handleLiff}>
-                                            Send Message
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button onClick={handleLiffClose}>
-                                            Close Window
-                                        </button>
-                                    </li>
-                                </ul>
+                                <button onClick={handleLiff}>
+                                    Send Message & Close Window
+                                </button>
+                                {navURL && 
+                                    <button>
+                                        <a id="navigate" href={navURL}>GO</a>
+                                    </button>
+                                }
                             </div>
                             <div className="floorBtnContainer">
                                 {floorList.map((floor) => (
