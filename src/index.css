@@ -442,7 +442,7 @@ body {
 
   .infoWindow::-webkit-scrollbar-track {
     background-color: transparent;
-    margin: 20px 0 2px 0;
+    margin: 2px 0 2px 0;
   }
 
   .toilet h2 {

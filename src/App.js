@@ -46,6 +46,7 @@ function App() {
       <Map/>
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/place/msg/:condition" element={<InfoWindow liffObject={liffObject} location={location}/>}/>
         <Route path="/place/:id" element={<InfoWindow liffObject={liffObject} location={location}/>}/>
         <Route path="/place/discuss/:id" element={<Discuss/>}/>
         <Route path="/place/toiletPage/:id" element={<ToiletPage/>}/>
