@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 const useLiff = () => {
     const [liffObject, setLiffObject] = useState(null);
     const [liffError, setLiffError] = useState(null);
+    const [liffInfo, setLiffInfo] = useState(null);
 
     useEffect(() => {
         const initLiff = async () => {
@@ -12,7 +13,7 @@ const useLiff = () => {
                 console.log(liff.isLoggedIn());
                 if (liff.isLoggedIn()){
                     const profile = await liff.getProfile();
-                    console.log(profile);
+                    setLiffInfo(profile);
                 }
                 setLiffObject(liff);
             } catch (error) {
@@ -23,7 +24,7 @@ const useLiff = () => {
         initLiff();
     }, []);
 
-    return ({ liffObject, liffError });
+    return ({ liffObject, liffError, liffInfo });
 }
 
 export default useLiff
