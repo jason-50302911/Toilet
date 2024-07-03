@@ -27,7 +27,7 @@ function App() {
 
   const { data, isLoading, fetchError } = useAxiosFetch(URL, nowCenter);
   const location = useGeoLocation();
-  const { liffObject, liffError, liffInfo } = useLiff();
+  const { liffObject, liffError } = useLiff();
 
   useEffect(() => {
     if (mode === 'detect'){
@@ -46,7 +46,7 @@ function App() {
       <Map/>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/place/:id" element={<InfoWindow liffObject={liffObject} liffInfo={liffInfo}/>}/>
+        <Route path="/place/:id" element={<InfoWindow liffObject={liffObject}/>}/>
         <Route path="/place/discuss/:id" element={<Discuss/>}/>
         <Route path="/place/toiletPage/:id" element={<ToiletPage/>}/>
       </Routes> 

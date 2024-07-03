@@ -9,11 +9,9 @@ const useLiff = () => {
         const initLiff = async () => {
             try {
                 await liff.init({ liffId: process.env.REACT_APP_LIFF_ID });
-                if (liff.isLoggedIn()){
-                    const profile = await liff.getProfile();
-                    setLiffObject(liff);
-                } else setLiffObject(null);
-            } catch (error) {
+                if (liff.isLoggedIn())setLiffObject(liff)
+                else setLiffObject(null);
+                } catch (error) {
                 console.log(`liff init failed: ${error}`);
                 setLiffError(error.toString());
             }
@@ -21,7 +19,7 @@ const useLiff = () => {
         initLiff();
     }, []);
 
-    return ({ liffObject, liffError, liffInfo });
+    return ({ liffObject, liffError });
 }
 
 export default useLiff
