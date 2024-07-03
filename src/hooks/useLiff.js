@@ -14,8 +14,8 @@ const useLiff = () => {
                 if (liff.isLoggedIn()){
                     const profile = await liff.getProfile();
                     setLiffInfo(profile);
-                }
-                setLiffObject(liff);
+                    setLiffObject(liff);
+                } else setLiffObject(null);
             } catch (error) {
                 console.log(`liff init failed: ${error}`);
                 setLiffError(error.toString());

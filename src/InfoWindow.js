@@ -80,10 +80,12 @@ const InfoWindow = ({ liffObject, liffInfo }) => {
     }
 
     const handleLiff = () => {
-        liffObject.sendMessages([{
-            type: "text",
-            text: liffInfo,
-        }, ]);
+        if (liffInfo) {
+            liffObject.sendMessages([{
+                type: "text",
+                text: "Successful login",
+            }, ]);
+        } 
     }
 
 
