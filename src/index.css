@@ -509,13 +509,18 @@ body {
     background-color: hsl(180, 38%, 56%);
     display: flex; 
     width: 100%;
-    height: 3vh;
+    height: 40px;
     justify-content: center;
     align-items: center;
     font-size: 1.3rem;
     color: whitesmoke;
     border-radius: 10px 10px 0 0;
     cursor: pointer;
+  }
+
+  .controlWindow svg {
+    display: flex;
+    align-items: flex-start;
   }
 
   .Header {
