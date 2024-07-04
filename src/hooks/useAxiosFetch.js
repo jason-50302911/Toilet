@@ -15,14 +15,14 @@ const useAxiosFetch = (dataUrl, location, mode) => {
 
         const fetchData = async (url, location, mode) => {
             setIsLoading(true);
+            console.log(mode);
             try {
                 let response = null;
-                console.log(mode);
-                if (mode === 'detect'){
+                if (mode === 'finding'){
                     response = await axios.get(url, {
                         cancelToken: source.token,
                         params: {
-                            target: "initMap",
+                            target: "finding",
                             lat: location.lat,
                             lng: location.lng
                         }
@@ -38,7 +38,7 @@ const useAxiosFetch = (dataUrl, location, mode) => {
                     })
                 }
                 if (isMounted) {
-                    if(mode === "detect"){
+                    if(mode === "finding"){
                         const res = response.data;
                         setToiletData(res.toiletData);
                         setNearToilet(res.nearest_uuid);
@@ -50,7 +50,7 @@ const useAxiosFetch = (dataUrl, location, mode) => {
             } catch (err) {
                 if (isMounted) {
                     setFetchError(err.message);
-                     setToiletData([]);
+                    setToiletData([]);
                 }
             } finally {
                 isMounted && setIsLoading(false);

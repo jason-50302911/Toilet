@@ -12,6 +12,7 @@ import Map from "./Maps";
 import ToiletPage from './ToiletPage';
 import SelectForm from "./SelectTypeForm";
 import Selected from './Selected';
+import Finding from './Finding';
 
 
 function App() {
@@ -21,12 +22,9 @@ function App() {
   const setToilets = useStoreActions((actions) => actions.setToilets);
   const setNowCenter = useStoreActions((actions) => actions.setNowCenter);
   const setInitLocation = useStoreActions((actions) => actions.setInitLocation);
-  const setClickNumber = useStoreActions((actions) => actions.setClickNumber);
-  const setCenPoint = useStoreActions((actions) => actions.setCenPoint);
-  const setInfoWinState = useStoreActions((actions) => actions.setInfoWinState);
 
-  const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com";
-  // const URL = "http://192.168.100.169:5000"
+  // const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com";
+  const URL = "http://192.168.100.169:5000"
 
   const { toiletData, nearToilet, nearLoc } = useAxiosFetch(URL, nowCenter, mode);
   
@@ -35,19 +33,11 @@ function App() {
   const { liffObject } = useLiff();
 
   useEffect(() => {
-    if (mode === 'detect'){
+    if (mode === 'detect' || mode === 'finding'){
       setNowCenter(location.coordinates);
       setInitLocation(location.coordinates);
     }
   }, [location, setNowCenter, mode, setInitLocation]);
-
-  useEffect(() => {
-    if (mode === "detect") {
-      if (nearToilet) setClickNumber(nearToilet);
-      if (nearLoc) setCenPoint(nearLoc);
-      setInfoWinState('idle');
-    }
-  }, [nearToilet, mode, setClickNumber, nearLoc, setCenPoint, setInfoWinState]);
 
   useEffect(() => {
     setToilets(toiletData);
@@ -60,10 +50,11 @@ function App() {
       <Map/>
       <Routes>
         <Route path="/" element={<InfoWindow liffObject={liffObject}/>}/>
-        <Route path="/place/msg/:condition" element={<Selected/>}/>
+        <Route path="/finding/:findMode" element={<Finding nearToilet={nearToilet} nearLoc={nearLoc}/>}/>
+        <Route path="/msg/:condition" element={<Selected/>}/>
         <Route path="/place/:id" element={<InfoWindow liffObject={liffObject}/>}/>
-        <Route path="/place/discuss/:id" element={<Discuss/>}/>
-        <Route path="/place/toiletPage/:id" element={<ToiletPage/>}/>
+        <Route path="/discuss/:id" element={<Discuss/>}/>
+        <Route path="/toiletPage/:id" element={<ToiletPage/>}/>
       </Routes> 
     </div>
 );

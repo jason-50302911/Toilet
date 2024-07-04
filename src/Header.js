@@ -1,5 +1,4 @@
 import React from 'react'
-import { FaToilet } from 'react-icons/fa';
 import toiletImage from './images/toilet.png';
 
 const Header = ({ webTitle }) => {

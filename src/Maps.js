@@ -13,6 +13,7 @@ const Maps = ()  => {
     
     const cenPoint = useStoreState((state) => state.cenPoint);
     const mode = useStoreState((state) => state.mode);
+    const nowCenter = useStoreState((state) => state.nowCenter);
 
     const { width } = useWindowSize();
 
@@ -20,16 +21,28 @@ const Maps = ()  => {
     const setNowCenter = useStoreActions((actions) => actions.setNowCenter);
     const setMode = useStoreActions((actions) => actions.setMode);
 
+
     const debounce = _.debounce((_changeCenter) => {
         setNowCenter(_changeCenter); 
-      }, 500);
+      }, 250);
 
     useEffect(() => {
-      if (mode === "detect" && cenPoint) {
-        if ( width <= 800) setCenter({ lat: parseFloat(cenPoint.lat - 0.003), lng: parseFloat(cenPoint.lng) })
-        else setCenter({ lat: parseFloat(cenPoint.lat), lng: parseFloat(cenPoint.lng - 0.0045) })
+      let nlat = null;
+      let nlng = null;
+      if (mode === "detect" && nowCenter) {
+        nlat = nowCenter.lat;
+        nlng = nowCenter.lng;
       }
-    }, [cenPoint, mode, width]);
+      if (mode === "finding" && cenPoint) {
+        nlat = cenPoint.lat;
+        nlng = cenPoint.lng;
+      }
+
+      if (nlat || nlng) {
+        if ( width <= 800) setCenter({ lat: parseFloat(nlat - 0.003), lng: parseFloat(nlng) })
+        else setCenter({ lat: parseFloat(nlat), lng: parseFloat(nlng - 0.0045) })
+      }
+    }, [cenPoint, mode, nowCenter, setCenter, width]);
 
     const handleCameraChange = (event) => {
       const presentCenter = event.detail.center;

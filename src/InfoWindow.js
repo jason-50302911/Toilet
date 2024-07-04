@@ -52,7 +52,7 @@ const InfoWindow = ({ liffObject }) => {
                 setToiletAddress(information.address);
                 setDisplayToilet(filterToilet);
                 setNavURL(`https://www.google.com/maps/dir/?api=1&origin=${orlat},${orlng}&destination=${information.lat}, ${information.lng}&travelmode=driving`);
-            } else setDisplayToilet([]);
+            }
         }
     }, [renderToilets, clickNumber, clickFloor, initLocation, setInfoWinState]);
 
@@ -69,7 +69,6 @@ const InfoWindow = ({ liffObject }) => {
         if (displayToilet) {
             const idArray = [];
             displayToilet.forEach((toilet) => idArray.push(toilet.id));
-            console.log(2);
             findingSearchId(idArray);
         }
     }, [displayToilet, findingSearchId]);
