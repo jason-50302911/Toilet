@@ -11,8 +11,7 @@ html {
 }
 
 body {
-  display: flex;
-  flex: 1;
+  padding-bottom: env(safe-area-inset-bottom);
   min-height: 100vh;
   min-width: 100vw;
   font-family: 'Open Sans', sans-serif;
