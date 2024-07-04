@@ -2,8 +2,8 @@ import { createStore, action, thunk, computed } from "easy-peasy";
 import axios from 'axios';
 import qs from 'qs';
 
-// const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com/";
-const URL = "http://192.168.100.169:5000"
+const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com/";
+// const URL = "http://192.168.100.169:5000"
 
 export default createStore({
     toilets: [],

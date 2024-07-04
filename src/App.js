@@ -25,8 +25,8 @@ function App() {
   const setCenPoint = useStoreActions((actions) => actions.setCenPoint);
   const setInfoWinState = useStoreActions((actions) => actions.setInfoWinState);
 
-  // const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com";
-  const URL = "http://192.168.100.169:5000"
+  const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com";
+  // const URL = "http://192.168.100.169:5000"
 
   const { toiletData, nearToilet, nearLoc } = useAxiosFetch(URL, nowCenter, mode);
   
