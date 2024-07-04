@@ -11,6 +11,8 @@ html {
 }
 
 body {
+  display: flex;
+  flex: 1;
   min-height: 100vh;
   min-width: 100vw;
   font-family: 'Open Sans', sans-serif;
@@ -106,12 +108,13 @@ body {
 .infoContainer {
   position: absolute;
   width: 50%;
-  max-width: 550px;
+  max-width: 500px;
   height: 80%;
   bottom: 45px;
   left: 0px;
   background-color: hsl(180, 38%, 56%);
-  background-color: transparent;}
+  background-color: transparent;
+}
 
 .infoWindow, .toiletPage  {
   display: flex;
@@ -120,7 +123,7 @@ body {
   position: absolute;
   margin: 0;
   width: 100%;
-  max-width: 550px;
+  max-width: 500px;
   height: 100%;
   bottom: 20px;
   left: 0px;

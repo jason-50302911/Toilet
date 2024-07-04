@@ -44,13 +44,13 @@ const Markers = () => {
       const plat = point.lat;
       const plng = point.lng;
       if (width > 800) {
-        map.panTo({ lat: parseFloat(plat), lng: parseFloat(plng) - 0.0009 });
+        map.panTo({ lat: parseFloat(plat), lng: parseFloat(plng) - 0.0024 });
         map.setZoom(17);
       }
       else {
         const modifyPosition = { lat: parseFloat(plat - 0.002), lng: parseFloat(plng) };
         map.panTo(modifyPosition);
-        map.setZoom(16.8);
+        map.setZoom(18);
       }
 
       setClickNumber(point.uuid);
