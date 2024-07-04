@@ -4,6 +4,7 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 import Markers from './Markers';
 import _ from 'lodash';
 import useWindowSize from "./hooks/useWindowSize";
+import BackToInit from "./BackToInit";
 
 const Maps = ()  => {
     const [center, setCenter] = useState(null);
@@ -55,6 +56,7 @@ const Maps = ()  => {
                     mapTypeId={"roadmap"}
                     onCameraChanged={event => handleCameraChange(event)}>
                     <Markers/>
+                    <BackToInit/>
                 </Map>
               </APIProvider>
           </div>

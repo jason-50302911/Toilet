@@ -374,6 +374,26 @@ body {
   font-size: 0.6rem;
 }
 
+.backInit {
+  position: absolute;
+  right: 5px;
+  bottom: 4vh;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 8;
+  color: whitesmoke;
+  padding: 0.1rem;
+  font-size: 1.3rem;
+  background-color: hsl(180, 45%, 60%);
+  border-radius: 45px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 7px hsl(0, 0%, 30%);
+}
+
 @media (max-width: 800px){
   .infoContainer {
     position: absolute;
@@ -461,7 +481,6 @@ body {
     bottom: 42vh;
     left: calc(50% - 50px);
     width: 100px;
-    height: 7px;
     background-color: transparent;
     display: flex; 
     justify-content: center;
@@ -477,11 +496,11 @@ body {
     z-index: 9;
     position: absolute;
     bottom: 0;
-    left: calc(50% - 50px);
+    left: 0;
     background-color: hsl(180, 38%, 56%);
     display: flex; 
-    width: 100px;
-    height: 23px;
+    width: 100%;
+    height: 3vh;
     justify-content: center;
     align-items: center;
     font-size: 1.3rem;
@@ -644,5 +663,25 @@ body {
     top: calc(100vh - 90vh + 10px);
     padding:  0.1rem 0.5rem 0.1rem 0.3rem;
     border-radius: 10px 0 0 10px;
+  }
+
+  .openBackInit {
+    position: absolute;
+    right: 5px;
+    bottom: 46vh;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 8;
+    color: whitesmoke;
+    padding: 0.1rem;
+    font-size: 1.3rem;
+    background-color: hsl(180, 45%, 60%);
+    border-radius: 45px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 7px hsl(0, 0%, 30%);
   }
 }

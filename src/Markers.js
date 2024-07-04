@@ -17,7 +17,7 @@ const Markers = () => {
     const type = useStoreState((state) => state.type);
     const clickNumber = useStoreState((state) => state.clickNumber);
     const renderToilets = useStoreState((state) => state.renderToilets);
-    const nowLocation = useStoreState((state) => state.nowLocation);
+    const initLocation = useStoreState((state) => state.initLocation);
 
     const { width } = useWindowSize();
 
@@ -61,7 +61,7 @@ const Markers = () => {
         <>
           {toilets && 
             <div>
-              <AdvancedMarker position={{ lat: parseFloat(nowLocation.lat), lng: parseFloat(nowLocation.lng) }}>
+              <AdvancedMarker position={{ lat: parseFloat(initLocation.lat), lng: parseFloat(initLocation.lng) }}>
                 <span className="nowLocation">
                   <FaArrowCircleDown/>
                 </span>

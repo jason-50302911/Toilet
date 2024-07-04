@@ -45,7 +45,7 @@ const useAxiosFetch = (dataUrl, location, mode) => {
                         setDistance(res.distance);
                         setNearLoc(res.near_loc);
                         setFetchError(null);
-                    } else if (mode === "moving")setToiletData(response.data);
+                    } else setToiletData(response.data);
                 }
             } catch (err) {
                 if (isMounted) {

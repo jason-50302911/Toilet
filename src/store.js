@@ -18,9 +18,9 @@ export default createStore({
     setClickNumber: action((state, payload) => {
         state.clickNumber = payload;
     }),
-    nowLocation: null, 
-    setNowLocation: action((state, payload) => {
-        state.nowLocation = payload;
+    initLocation: null, 
+    setInitLocation: action((state, payload) => {
+        state.initLocation = payload;
     }),
     renderToilets: [],
     setRenderToilets: action((state, payload) => {

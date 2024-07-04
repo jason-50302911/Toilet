@@ -20,7 +20,7 @@ function App() {
   
   const setToilets = useStoreActions((actions) => actions.setToilets);
   const setNowCenter = useStoreActions((actions) => actions.setNowCenter);
-  const setNowLocation = useStoreActions((actions) => actions.setNowLocation);
+  const setInitLocation = useStoreActions((actions) => actions.setInitLocation);
   const setClickNumber = useStoreActions((actions) => actions.setClickNumber);
   const setCenPoint = useStoreActions((actions) => actions.setCenPoint);
   const setInfoWinState = useStoreActions((actions) => actions.setInfoWinState);
@@ -37,9 +37,9 @@ function App() {
   useEffect(() => {
     if (mode === 'detect'){
       setNowCenter(location.coordinates);
-      setNowLocation(location.coordinates);
+      setInitLocation(location.coordinates);
     }
-  }, [location, setNowCenter, mode, setNowLocation]);
+  }, [location, setNowCenter, mode, setInitLocation]);
 
   useEffect(() => {
     if (mode === "detect") {
@@ -59,17 +59,9 @@ function App() {
       <SelectForm/>
       <Map/>
       <Routes>
-        <Route path="/" element={
-            <InfoWindow 
-              liffObject={liffObject} 
-              location={location}
-            />}/>
+        <Route path="/" element={<InfoWindow liffObject={liffObject}/>}/>
         <Route path="/place/msg/:condition" element={<Selected/>}/>
-        <Route path="/place/:id" element={
-            <InfoWindow 
-              liffObject={liffObject} 
-              location={location}
-            />}/>
+        <Route path="/place/:id" element={<InfoWindow liffObject={liffObject}/>}/>
         <Route path="/place/discuss/:id" element={<Discuss/>}/>
         <Route path="/place/toiletPage/:id" element={<ToiletPage/>}/>
       </Routes> 

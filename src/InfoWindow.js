@@ -6,11 +6,12 @@ import { FaRestroom, FaAngleLeft, FaAngleDown, FaAngleRight, FaAngleUp } from 'r
 import useWindowSize from './hooks/useWindowSize';
 
 
-const InfoWindow = ({ liffObject, location }) => {
+const InfoWindow = ({ liffObject }) => {
     const searchResult = useStoreState((state) => state.searchResult);
     const renderToilets = useStoreState((state) => state.renderToilets);
     const clickNumber = useStoreState((state) => state.clickNumber);
     const infoWinState = useStoreState((state) => state.infoWinState);
+    const initLocation = useStoreState((state) => state.initLocation);
 
     const findingSearchId = useStoreActions((actions) => actions.findingSearchId);
     const setInfoWinState = useStoreActions((actions) => actions.setInfoWinState);
@@ -34,8 +35,8 @@ const InfoWindow = ({ liffObject, location }) => {
         const numberList = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
         if (clickNumber) {
             const information = renderToilets.find((toilet) => toilet.uuid === clickNumber);
-            const orlat = location.coordinates.lat;
-            const orlng = location.coordinates.lng;
+            const orlat = initLocation.lat;
+            const orlng = initLocation.lng;
             if (information !== undefined) {
                 const arounding = information["aggregate"];
                 const filterToilet = [];
@@ -53,7 +54,7 @@ const InfoWindow = ({ liffObject, location }) => {
                 setNavURL(`https://www.google.com/maps/dir/?api=1&origin=${orlat},${orlng}&destination=${information.lat}, ${information.lng}&travelmode=driving`);
             } else setDisplayToilet([]);
         }
-    }, [renderToilets, clickNumber, clickFloor, location, setInfoWinState]);
+    }, [renderToilets, clickNumber, clickFloor, initLocation, setInfoWinState]);
 
     useEffect(() => {
         if(clickNumber) setPreClickNumber(clickNumber);
