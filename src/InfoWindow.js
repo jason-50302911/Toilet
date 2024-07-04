@@ -7,6 +7,7 @@ import useWindowSize from './hooks/useWindowSize';
 
 
 const InfoWindow = ({ liffObject }) => {
+
     const searchResult = useStoreState((state) => state.searchResult);
     const renderToilets = useStoreState((state) => state.renderToilets);
     const clickNumber = useStoreState((state) => state.clickNumber);
@@ -30,7 +31,7 @@ const InfoWindow = ({ liffObject }) => {
 
     const toiletType = {  1: "男廁所", 2: "女廁所",  3: "親子廁所",  4: "無障礙廁所", 5: "性別友善廁所", 6: "混合廁所"};
     const week = { 0: "星期日", 1: "星期一", 2: "星期二", 3: "星期三", 4: "星期四", 5: "星期五", 6: "星期六" };
-
+    
     useEffect(() => {
         const numberList = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
         if (clickNumber) {

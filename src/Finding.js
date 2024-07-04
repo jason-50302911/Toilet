@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import { useParams } from "react-router-dom";
+import InfoWindow from "./InfoWindow";
 
 const Finding = ({ nearLoc, nearToilet }) => {
     const { findMode } = useParams();
@@ -23,7 +24,10 @@ const Finding = ({ nearLoc, nearToilet }) => {
             setInfoWinState('idle');
         }
     }, [nearToilet, nearLoc, setClickNumber, mode, setCenPoint, setInfoWinState]);
-
+    
+    return (
+        <InfoWindow/>
+    )
 }
 
 export default Finding
