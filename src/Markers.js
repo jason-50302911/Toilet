@@ -7,6 +7,7 @@ import { useStoreActions } from 'easy-peasy';
 import { useStoreState } from "easy-peasy";
 import MarkerIcon from "./MarkerIcon";
 import useWindowSize from './hooks/useWindowSize';
+import { FaArrowCircleDown } from "react-icons/fa";
 
 const Markers = () => {
     const map = useMap();
@@ -16,6 +17,7 @@ const Markers = () => {
     const type = useStoreState((state) => state.type);
     const clickNumber = useStoreState((state) => state.clickNumber);
     const renderToilets = useStoreState((state) => state.renderToilets);
+    const nowLocation = useStoreState((state) => state.nowLocation);
 
     const { width } = useWindowSize();
 
@@ -39,35 +41,45 @@ const Markers = () => {
     }, [toilets, setRenderToilets, type]);
 
     const handleOnClick = (point) => {
-      setClickNumber(point.uuid);
+      const plat = point.lat;
+      const plng = point.lng;
       if (width > 800) {
-        map.panTo({ lat: parseFloat(point.lat), lng: parseFloat(point.lng) - 0.0009 });
-        map.setZoom(18.5);
+        map.panTo({ lat: parseFloat(plat), lng: parseFloat(plng) - 0.0009 });
+        map.setZoom(17);
       }
       else {
-        const modifyPosition = { lat: parseFloat(point.lat - 0.002), lng: parseFloat(point.lng) };
+        const modifyPosition = { lat: parseFloat(plat - 0.002), lng: parseFloat(plng) };
         map.panTo(modifyPosition);
         map.setZoom(16.8);
       }
+
+      setClickNumber(point.uuid);
       setInfoWinState('idle');
     };
   
     return (
         <>
-            {toilets && 
-                (renderToilets.map((point) => (
-                    <AdvancedMarker
-                      position={{lat: parseFloat(point.lat), lng: parseFloat(point.lng)}}
-                      className={display ? "markerContainer" : "notDisplay"}
-                      key={point.uuid}
-                       onClick={() => handleOnClick(point)}>
-                      <MarkerIcon
-                        point={point}
-                        clickNumber={clickNumber}>
-                      </MarkerIcon>
-                    </AdvancedMarker>
-                )
-            ))}
+          {toilets && 
+            <div>
+              <AdvancedMarker position={{ lat: parseFloat(nowLocation.lat), lng: parseFloat(nowLocation.lng) }}>
+                <span className="nowLocation">
+                  <FaArrowCircleDown/>
+                </span>
+              </AdvancedMarker>
+              {renderToilets.map((point) => (
+                <AdvancedMarker
+                  position={{lat: parseFloat(point.lat), lng: parseFloat(point.lng)}}
+                  className={display ? "markerContainer" : "notDisplay"}
+                  key={point.uuid}
+                    onClick={() => handleOnClick(point)}>
+                  <MarkerIcon
+                    point={point}
+                    clickNumber={clickNumber}>
+                  </MarkerIcon>
+                </AdvancedMarker>
+              ))}
+            </div>
+          }
         </>
     );
   };

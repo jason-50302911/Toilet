@@ -2,8 +2,8 @@ import { createStore, action, thunk, computed } from "easy-peasy";
 import axios from 'axios';
 import qs from 'qs';
 
-const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com/";
-// const URL = "http://192.168.100.169:5000"
+// const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com/";
+const URL = "http://192.168.100.169:5000"
 
 export default createStore({
     toilets: [],
@@ -18,6 +18,10 @@ export default createStore({
     setClickNumber: action((state, payload) => {
         state.clickNumber = payload;
     }),
+    nowLocation: null, 
+    setNowLocation: action((state, payload) => {
+        state.nowLocation = payload;
+    }),
     renderToilets: [],
     setRenderToilets: action((state, payload) => {
         state.renderToilets = payload;
@@ -25,6 +29,14 @@ export default createStore({
     place: [],
     setPlace: action((state, payload) => {
         state.place = payload;
+    }),
+    distance: null,
+    setDistance: action((state, payload) => {
+        state.distance = payload;
+    }),
+    cenPoint: null,
+    setCenPoint: action((state, payload) =>{
+        state.cenPoint = payload;
     }),
     mode: 'detect',
     setMode: action((state, payload) => {

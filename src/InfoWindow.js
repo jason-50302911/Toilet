@@ -14,7 +14,8 @@ const InfoWindow = ({ liffObject, location }) => {
 
     const findingSearchId = useStoreActions((actions) => actions.findingSearchId);
     const setInfoWinState = useStoreActions((actions) => actions.setInfoWinState);
-
+    
+    const [preClickNumber, setPreClickNumber] = useState(null);
     const [clickFloor, setClickFloor] = useState([]);
     const [numberToilet, setNumberToilet] = useState({});
     const [toiletName, setToiletName] = useState('');
@@ -52,13 +53,22 @@ const InfoWindow = ({ liffObject, location }) => {
                 setNavURL(`https://www.google.com/maps/dir/?api=1&origin=${orlat},${orlng}&destination=${information.lat}, ${information.lng}&travelmode=driving`);
             } else setDisplayToilet([]);
         }
-    }, [renderToilets, clickNumber, clickFloor, location]);
+    }, [renderToilets, clickNumber, clickFloor, location, setInfoWinState]);
 
+    useEffect(() => {
+        if(clickNumber) setPreClickNumber(clickNumber);
+        if (preClickNumber && preClickNumber !== clickNumber) {
+            setClickFloor([]);
+            setPreClickNumber(clickNumber);
+        }
+
+    }, [clickNumber, preClickNumber]);
 
     useEffect(() => {
         if (displayToilet) {
             const idArray = [];
             displayToilet.forEach((toilet) => idArray.push(toilet.id));
+            console.log(2);
             findingSearchId(idArray);
         }
     }, [displayToilet, findingSearchId]);
@@ -67,13 +77,16 @@ const InfoWindow = ({ liffObject, location }) => {
     const handleFloorClick = (floor) => {
         const floorLength = floorList.length;
         let newClickList = [];
-            
+
+        if (clickFloor.length + 1 === floorLength) {
+            setClickFloor([]);
+            return;
+        };
+        
         if (clickFloor.includes(floor)) {
             newClickList = clickFloor.filter((clicked) => clicked !== floor);
-        } else  {
-            if (clickFloor.length >= floorLength.length - 1) return;
-            newClickList = [...clickFloor, floor];
-        };
+        } else newClickList = [...clickFloor, floor];
+
         setClickFloor(newClickList);
     }
     
@@ -104,52 +117,52 @@ const InfoWindow = ({ liffObject, location }) => {
                             onClick={clickCloseBtn}>
                             {width > 800 ? <FaAngleLeft/> : <FaAngleDown/>}
                         </div>
-                        <div className="infoWindow">
-                            <div className="smallWindow">
-                                <h2>{toiletName}</h2>
-                                <p>{toiletAddress}</p>
-                                <p>開放時間: {week[day]}  8:00 - 17:00</p>
-                                <button onClick={handleLiff}>
-                                    Send Message & Close Window
-                                </button>
-                                {navURL && 
-                                    <button>
-                                        <a id="navigate" href={navURL}>GO</a>
+                            <div className="infoWindow">
+                                <div className="smallWindow">
+                                    <h2>{toiletName}</h2>
+                                    <p>{toiletAddress}</p>
+                                    <p>開放時間: {week[day]}  8:00 - 17:00</p>
+                                    <button onClick={handleLiff}>
+                                        Send Message & Close Window
                                     </button>
-                                }
+                                    {navURL && 
+                                        <button>
+                                            <a id="navigate" href={navURL}>GO</a>
+                                        </button>
+                                    }
+                                </div>
+                                <div className="floorBtnContainer">
+                                    {floorList.map((floor) => (
+                                        <button 
+                                            className={ clickFloor.length === 0 || clickFloor.includes(floor)? "pushedFloorBtn" : "floorBtn"}
+                                            key={floor}
+                                            onClick={() => handleFloorClick(floor)}
+                                        >{floor}</button>
+                                    ))}
+                                </div>
+                                <ul className="toiletTypeContainer">
+                                    {Object.entries(numberToilet).map(([number, bool]) => (
+                                        <li 
+                                            className={ bool ? "toiletSection" : "nonToiletSection"}
+                                            key={number}>
+                                            <FaRestroom/>
+                                            <p>{toiletType[number]}</p>
+                                        </li>
+                                    ))}
+                                </ul>
+                                {(searchResult.map((toilet) => (
+                                    <Toilet 
+                                        key={toilet.number} 
+                                        toilet={toilet}
+                                    />
+                                )))}
                             </div>
-                            <div className="floorBtnContainer">
-                                {floorList.map((floor) => (
-                                    <button 
-                                        className={ clickFloor.length === 0 || clickFloor.includes(floor) ? "pushedFloorBtn" : "floorBtn"}
-                                        key={floor}
-                                        onClick={() => handleFloorClick(floor)}
-                                    >{floor}</button>
-                                ))}
-                            </div>
-                            <ul className="toiletTypeContainer">
-                                {Object.entries(numberToilet).map(([number, bool]) => (
-                                    <li 
-                                        className={ bool ? "toiletSection" : "nonToiletSection"}
-                                        key={number}>
-                                        <FaRestroom/>
-                                        <p>{toiletType[number]}</p>
-                                    </li>
-                                ))}
-                            </ul>
-                            {(searchResult.map((toilet) => (
-                                <Toilet 
-                                    key={toilet.number} 
-                                    toilet={toilet}
-                                />
-                            )))}
-                        </div>
                     </div> :  
-                        <div 
-                            className="controlWindowClose"
-                            onClick={clickCloseBtn}>
-                            {width > 800 ? <FaAngleRight/> : <FaAngleUp/>}
-                        </div>
+                    <div 
+                        className="controlWindowClose"
+                        onClick={clickCloseBtn}>
+                        {width > 800 ? <FaAngleRight/> : <FaAngleUp/>}
+                    </div>
             }
         </>
 

@@ -3,14 +3,17 @@ import { useEffect, useState } from "react";
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import Markers from './Markers';
 import _ from 'lodash';
+import useWindowSize from "./hooks/useWindowSize";
 
 const Maps = ()  => {
     const [center, setCenter] = useState(null);
 
-    const defaultZoomLevel = 17;
+    const defaultZoomLevel = 16;
     
-    const nowCenter = useStoreState((state) => state.nowCenter);
+    const cenPoint = useStoreState((state) => state.cenPoint);
     const mode = useStoreState((state) => state.mode);
+
+    const { width } = useWindowSize();
 
     const setDisplay = useStoreActions((actions) => actions.setDisplay);
     const setNowCenter = useStoreActions((actions) => actions.setNowCenter);
@@ -21,17 +24,18 @@ const Maps = ()  => {
       }, 500);
 
     useEffect(() => {
-      if (mode === "detect") {
-        setCenter(nowCenter);
+      if (mode === "detect" && cenPoint) {
+        if ( width <= 800) setCenter({ lat: parseFloat(cenPoint.lat - 0.003), lng: parseFloat(cenPoint.lng) })
+        else setCenter({ lat: parseFloat(cenPoint.lat), lng: parseFloat(cenPoint.lng - 0.0045) })
       }
-    }, [nowCenter, mode]);
+    }, [cenPoint, mode, width]);
 
     const handleCameraChange = (event) => {
       const presentCenter = event.detail.center;
       const zoomSize = event.detail.zoom;
       if (zoomSize > 13) {
         debounce(presentCenter);
-        setMode('Moving');
+        setMode('moving');
       }
       if (zoomSize < 13) setDisplay(false);
       else setDisplay(true);

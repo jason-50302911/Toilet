@@ -11,7 +11,7 @@ const useLiff = () => {
                 await liff.init({ liffId: process.env.REACT_APP_LIFF_ID });
                 if (liff.isLoggedIn())setLiffObject(liff)
                 else setLiffObject(null);
-                } catch (error) {
+            } catch (error) {
                 console.log(`liff init failed: ${error}`);
                 setLiffError(error.toString());
             }

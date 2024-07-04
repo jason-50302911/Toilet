@@ -9,10 +9,9 @@ import useLiff from './hooks/useLiff';
 import InfoWindow from './InfoWindow';
 import Discuss from './Discuss';
 import Map from "./Maps";
-import Home from './Home';
 import ToiletPage from './ToiletPage';
 import SelectForm from "./SelectTypeForm";
-
+import Selected from './Selected';
 
 
 function App() {
@@ -21,23 +20,38 @@ function App() {
   
   const setToilets = useStoreActions((actions) => actions.setToilets);
   const setNowCenter = useStoreActions((actions) => actions.setNowCenter);
+  const setNowLocation = useStoreActions((actions) => actions.setNowLocation);
+  const setClickNumber = useStoreActions((actions) => actions.setClickNumber);
+  const setCenPoint = useStoreActions((actions) => actions.setCenPoint);
+  const setInfoWinState = useStoreActions((actions) => actions.setInfoWinState);
 
-  const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com";
-  // const URL = "http://192.168.100.169:5000"
+  // const URL = "https://toiletproject-e05ca1dabfc6.herokuapp.com";
+  const URL = "http://192.168.100.169:5000"
 
-  const { data, isLoading, fetchError } = useAxiosFetch(URL, nowCenter);
+  const { toiletData, nearToilet, nearLoc } = useAxiosFetch(URL, nowCenter, mode);
+  
   const location = useGeoLocation();
-  const { liffObject, liffError } = useLiff();
+
+  const { liffObject } = useLiff();
 
   useEffect(() => {
     if (mode === 'detect'){
       setNowCenter(location.coordinates);
+      setNowLocation(location.coordinates);
     }
-  }, [location, setNowCenter, mode]);
+  }, [location, setNowCenter, mode, setNowLocation]);
 
   useEffect(() => {
-    setToilets(data);
-  }, [data, setToilets]);
+    if (mode === "detect") {
+      if (nearToilet) setClickNumber(nearToilet);
+      if (nearLoc) setCenPoint(nearLoc);
+      setInfoWinState('idle');
+    }
+  }, [nearToilet, mode, setClickNumber, nearLoc, setCenPoint, setInfoWinState]);
+
+  useEffect(() => {
+    setToilets(toiletData);
+  }, [toiletData, setToilets]);
 
   return (
     <div className="App">
@@ -45,9 +59,17 @@ function App() {
       <SelectForm/>
       <Map/>
       <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/place/msg/:condition" element={<InfoWindow liffObject={liffObject} location={location}/>}/>
-        <Route path="/place/:id" element={<InfoWindow liffObject={liffObject} location={location}/>}/>
+        <Route path="/" element={
+            <InfoWindow 
+              liffObject={liffObject} 
+              location={location}
+            />}/>
+        <Route path="/place/msg/:condition" element={<Selected/>}/>
+        <Route path="/place/:id" element={
+            <InfoWindow 
+              liffObject={liffObject} 
+              location={location}
+            />}/>
         <Route path="/place/discuss/:id" element={<Discuss/>}/>
         <Route path="/place/toiletPage/:id" element={<ToiletPage/>}/>
       </Routes> 
