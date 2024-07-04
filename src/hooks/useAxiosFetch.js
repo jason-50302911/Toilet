@@ -15,7 +15,6 @@ const useAxiosFetch = (dataUrl, location, mode) => {
 
         const fetchData = async (url, location, mode) => {
             setIsLoading(true);
-            console.log(mode);
             try {
                 let response = null;
                 if (mode === 'finding'){
