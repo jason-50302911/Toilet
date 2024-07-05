@@ -18,6 +18,7 @@ const Markers = () => {
     const clickNumber = useStoreState((state) => state.clickNumber);
     const renderToilets = useStoreState((state) => state.renderToilets);
     const initLocation = useStoreState((state) => state.initLocation);
+    const mapCenter = useStoreState((state) => state.mapCenter);
 
     const { width } = useWindowSize();
 
@@ -43,23 +44,25 @@ const Markers = () => {
     const handleOnClick = (point) => {
       const plat = point.lat;
       const plng = point.lng;
-      if (width > 800) {
-        map.panTo({ lat: parseFloat(plat), lng: parseFloat(plng) - 0.0024 });
-        map.setZoom(17);
-      }
-      else {
-        const modifyPosition = { lat: parseFloat(plat - 0.001), lng: parseFloat(plng) };
-        map.panTo(modifyPosition);
-        map.setZoom(18);
-      }
+      if (map) {
+        if (width > 800) {
+          map.panTo({ lat: parseFloat(plat), lng: parseFloat(plng) - 0.0006 });
+          map.setZoom(19);
+        }
+        else {
+          const modifyPosition = { lat: parseFloat(plat - 0.001), lng: parseFloat(plng) };
+          map.panTo(modifyPosition);
+          map.setZoom(18);
+        }
 
-      setClickNumber(point.uuid);
-      setInfoWinState('idle');
+        setClickNumber(point.uuid);
+        setInfoWinState('idle');
+      }
     };
   
     return (
         <>
-          {toilets && 
+          {toilets && mapCenter &&
             <div>
               <AdvancedMarker position={{ lat: parseFloat(initLocation.lat), lng: parseFloat(initLocation.lng) }}>
                 <span className="nowLocation">

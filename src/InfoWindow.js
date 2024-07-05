@@ -120,14 +120,17 @@ const InfoWindow = ({ liffObject }) => {
                         </div>
                             <div className="infoWindow">
                                 <div className="smallWindow">
-                                    <h2>{toiletName}</h2>
-                                    <p>{toiletAddress}</p>
-                                    <p>開放時間: {week[day]}  8:00 - 17:00</p>
-                                    <button onClick={handleLiff}>
-                                        Send Message & Close Window
-                                    </button>
+                                    <div className="infoDetails">
+                                        <h1>{toiletName}</h1>
+                                        <p>{toiletAddress}</p>
+                                        <p>開放時間: {week[day]}  8:00 - 17:00</p>
+                                    </div>
+                                    {liffObject && 
+                                        <button onClick={handleLiff}>
+                                            Send Message & Close Window
+                                        </button>}
                                     {navURL && 
-                                        <button>
+                                        <button className="naviBtn">
                                             <a id="navigate" href={navURL}>GO</a>
                                         </button>
                                     }
@@ -159,11 +162,11 @@ const InfoWindow = ({ liffObject }) => {
                                 )))}
                             </div>
                     </div> :  
-                    <div 
+                    (<div 
                         className="controlWindowClose"
                         onClick={clickCloseBtn}>
-                        {width > 800 ? <FaAngleRight/> : <FaAngleUp/>}
-                    </div>
+                        {displayToilet.length !== 0 && (width > 800 ? <FaAngleRight/> : <FaAngleUp/>)}
+                    </div>)
             }
         </>
 

@@ -42,6 +42,10 @@ export default createStore({
     setMode: action((state, payload) => {
         state.mode = payload;
     }),
+    mapCenter: null,
+    setMapCenter: action((state, payload) => {
+        state.mapCenter = payload;
+    }),
     nowCenter: null,
     setNowCenter: action((state, payload) => {
         state.nowCenter = payload;

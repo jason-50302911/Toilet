@@ -9,6 +9,7 @@ const SelectTypeForm = () => {
     const { width } = useWindowSize();
 
     const type = useStoreState((state) => state.type);
+    const mapCenter = useStoreState((state) => state.mapCenter);
     
     const setType = useStoreActions((actions) => actions.setType);
 
@@ -33,26 +34,29 @@ const SelectTypeForm = () => {
     }
 
     return (
-        <nav className="selectForm">
-            <ul className="buttonGroup">
-                {Object.entries(toiletType).map(([number, toiletTw]) => (
-                    <li 
-                        key={number}
-                        id={toiletTw}
-                        onMouseOut={() => setWord('')}
-                        onMouseOver={() => setWord(number)}
-                        className="selectContainer">
-                        { width > 800 && <p className={number === word ? "displayWord" : "nonDisplay"}>{toiletType[word]}</p>}
-                        <button 
-                            className={type.includes(number) ? "btnFocus" : "btn"}
-                            onClick={() => handleBtnClick(number)}
-                        ><FaRestroom/></button>
-                    </li>))
-                }
-            </ul>
-            { width <= 800 && <p className={word ? "asideWord" : "nonAsideWord"}>{toiletType[word]}</p>}
-        </nav>
-    )
+        <>
+            {mapCenter && 
+                <nav className="selectForm">
+                    <ul className="buttonGroup">
+                        {Object.entries(toiletType).map(([number, toiletTw]) => (
+                            <li 
+                                key={number}
+                                id={toiletTw}
+                                onMouseOut={() => setWord('')}
+                                onMouseOver={() => setWord(number)}
+                                className="selectContainer">
+                                { width > 800 && <p className={number === word ? "displayWord" : "nonDisplay"}>{toiletType[word]}</p>}
+                                <button 
+                                    className={type.includes(number) ? "btnFocus" : "btn"}
+                                    onClick={() => handleBtnClick(number)}
+                                ><FaRestroom/></button>
+                            </li>))
+                        }
+                    </ul>
+                    { width <= 800 && <p className={word ? "asideWord" : "nonAsideWord"}>{toiletType[word]}</p>}
+                </nav>}
+            </>
+        )
 }
 
 export default SelectTypeForm

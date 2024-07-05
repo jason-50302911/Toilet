@@ -26,7 +26,7 @@ function App() {
   const URL = process.env.REACT_APP_BACKEND_URL;
   // const URL = "http://192.168.100.169:5000"
 
-  const { toiletData, nearToilet, nearLoc } = useAxiosFetch(URL, nowCenter, mode);
+  const { toiletData, nearToilet, nearLoc, distance } = useAxiosFetch(URL, nowCenter, mode);
   
   const location = useGeoLocation();
 
@@ -47,7 +47,7 @@ function App() {
     <div className="App">
       <Header webTitle="Eazy Toilet"/>
       <SelectForm/>
-      <Map/>
+      <Map distance={distance}/>
       <Routes>
         <Route path="/" element={<InfoWindow liffObject={liffObject}/>}/>
         <Route path="/finding/:findMode" element={<Finding nearToilet={nearToilet} nearLoc={nearLoc} liffObject={liffObject}/>}/>

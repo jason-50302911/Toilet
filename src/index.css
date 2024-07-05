@@ -135,7 +135,7 @@ body {
   left: 0px;
   color: whitesmoke;
   background-color: hsl(180, 38%, 56%);
-  box-shadow: 0 0 7px hsl(0, 0%, 30%);
+  box-shadow: 1px 2px 7px hsl(0, 0%, 30%);
   border-radius: 0 20px 20px 0;
   padding: 1rem;
   overflow-y: auto;
@@ -210,8 +210,34 @@ body {
 }
 
 .smallWindow {
-  padding-left: 0.3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
+.infoDetails h1{
+  font-size: 1.6rem;
+}
+
+.infoDetails p{
+  font-size: 0.7rem;
+}
+
+.smallWindow button {
+  width: 60px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  background-color: hsl(211, 56%, 53%);
+  box-shadow: 1px 2px 3px;
+}
+
+.smallWindow a{
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+}
+
 
 .floorBtnContainer {
   margin: 0.3rem;
@@ -385,7 +411,7 @@ body {
 
 .backInit {
   position: absolute;
-  right: 5px;
+  right: 1rem;
   bottom: 4vh;
   width: 45px;
   height: 45px;
@@ -402,6 +428,7 @@ body {
   cursor: pointer;
   box-shadow: 0 0 7px hsl(0, 0%, 30%);
 }
+
 
 @media (max-width: 800px){
   .infoContainer {
