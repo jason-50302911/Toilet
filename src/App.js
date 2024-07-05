@@ -50,7 +50,7 @@ function App() {
       <Map/>
       <Routes>
         <Route path="/" element={<InfoWindow liffObject={liffObject}/>}/>
-        <Route path="/finding/:findMode" element={<Finding nearToilet={nearToilet} nearLoc={nearLoc}/>}/>
+        <Route path="/finding/:findMode" element={<Finding nearToilet={nearToilet} nearLoc={nearLoc} liffObject={liffObject}/>}/>
         <Route path="/msg/:condition" element={<Selected/>}/>
         <Route path="/place/:id" element={<InfoWindow liffObject={liffObject}/>}/>
         <Route path="/discuss/:id" element={<Discuss/>}/>

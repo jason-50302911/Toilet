@@ -3,7 +3,7 @@ import { useStoreState, useStoreActions } from "easy-peasy";
 import { useParams } from "react-router-dom";
 import InfoWindow from "./InfoWindow";
 
-const Finding = ({ nearLoc, nearToilet }) => {
+const Finding = ({ nearLoc, nearToilet, liffObject }) => {
     const { findMode } = useParams();
     const mode = useStoreState((state) => state.mode);
 
@@ -26,7 +26,7 @@ const Finding = ({ nearLoc, nearToilet }) => {
     }, [nearToilet, nearLoc, setClickNumber, mode, setCenPoint, setInfoWinState]);
     
     return (
-        <InfoWindow/>
+        <InfoWindow liffObject={liffObject}/>
     )
 }
 
