@@ -36,7 +36,7 @@ const Maps = ({ distance })  => {
 
     useEffect(() => {
       if (distance) {
-        if (distance > 1.3) setDefZoom(13.4);
+        if (distance > 1.3) setDefZoom(12);
       } else setDefZoom(16);
     }, [distance, setDefZoom]);
 
