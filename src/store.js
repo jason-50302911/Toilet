@@ -2,8 +2,8 @@ import { createStore, action, thunk, computed } from "easy-peasy";
 import axios from 'axios';
 import qs from 'qs';
 
-// const URL = process.env.REACT_APP_BACKEND_URL;
-const URL = "http://192.168.100.169:5000"
+const URL = process.env.REACT_APP_BACKEND_URL;
+// const URL = "http://192.168.100.169:5000"
 
 export default createStore({
     toilets: [],
