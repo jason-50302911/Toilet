@@ -163,9 +163,13 @@ const InfoWindow = ({ liffObject }) => {
                             </div>
                     </div> :  
                     (<div 
-                        className="controlWindowClose"
-                        onClick={clickCloseBtn}>
-                        {displayToilet.length !== 0 && (width > 800 ? <FaAngleRight/> : <FaAngleUp/>)}
+                        className="controlWindowClose">
+                        {displayToilet.length !== 0 && 
+                            (width > 800 ? 
+                                <FaAngleRight 
+                                    onClick={clickCloseBtn}/> 
+                                : <FaAngleUp 
+                                    onClick={clickCloseBtn}/>)}
                     </div>)
             }
         </>

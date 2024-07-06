@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FaRestroom } from "react-icons/fa";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import useWindowSize from './hooks/useWindowSize';
+import CatLogo from "./images/catLogo1.png";
 
 const SelectTypeForm = () => {
     const [word, setWord] = useState('');
@@ -48,8 +49,10 @@ const SelectTypeForm = () => {
                                 { width > 800 && <p className={number === word ? "displayWord" : "nonDisplay"}>{toiletType[word]}</p>}
                                 <button 
                                     className={type.includes(number) ? "btnFocus" : "btn"}
-                                    onClick={() => handleBtnClick(number)}
-                                ><FaRestroom/></button>
+                                    onClick={() => handleBtnClick(number)}>
+                                    <img src={CatLogo}
+                                        alt="smallogo" width="61.44" height="81.96" title="Logo"/>
+                                </button>
                             </li>))
                         }
                     </ul>
