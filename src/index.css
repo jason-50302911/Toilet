@@ -629,8 +629,8 @@ body {
 
   .selectContainer {
     display: flex;
-    flex-direction: column-reverse;
     align-items: center;
+    justify-content: center;
   }
 
   .displayWord {
@@ -649,8 +649,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    height: 2rem;
+    width: 42px;
+    height: 42px;
     font-size: 1.5rem;
     font-weight: bold;
     background-color: hsl(0, 100%, 76%);

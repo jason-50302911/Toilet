@@ -23,8 +23,8 @@ function App() {
   const setNowCenter = useStoreActions((actions) => actions.setNowCenter);
   const setInitLocation = useStoreActions((actions) => actions.setInitLocation);
 
-  const URL = process.env.REACT_APP_BACKEND_URL;
-  // const URL = "http://192.168.100.169:5000"
+  // const URL = process.env.REACT_APP_BACKEND_URL;
+  const URL = "http://192.168.100.169:5000"
 
   const { toiletData, nearToilet, nearLoc, distance } = useAxiosFetch(URL, nowCenter, mode);
   

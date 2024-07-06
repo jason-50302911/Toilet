@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FaRestroom } from "react-icons/fa";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import useWindowSize from './hooks/useWindowSize';
-import CatLogo from "./images/catLogo1.png";
+import CatLogo from "./images/catLogo8.png";
 
 const SelectTypeForm = () => {
     const [word, setWord] = useState('');
@@ -51,7 +51,7 @@ const SelectTypeForm = () => {
                                     className={type.includes(number) ? "btnFocus" : "btn"}
                                     onClick={() => handleBtnClick(number)}>
                                     <img src={CatLogo}
-                                        alt="smallogo" width="61.44" height="81.96" title="Logo"/>
+                                        alt="smallogo" width="29.95" height="37" title="Logo"/>
                                 </button>
                             </li>))
                         }

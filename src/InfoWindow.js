@@ -49,6 +49,7 @@ const InfoWindow = ({ liffObject }) => {
                 });
                 setFloorList(information.floorList.sort());
                 setNumberToilet(numberList); 
+                console.log(filterToilet);
                 setToiletName(information.name);
                 setToiletAddress(information.address);
                 setDisplayToilet(filterToilet);
