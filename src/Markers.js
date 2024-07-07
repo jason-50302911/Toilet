@@ -50,7 +50,7 @@ const Markers = () => {
           map.setZoom(19);
         }
         else {
-          const modifyPosition = { lat: parseFloat(plat - 0.001), lng: parseFloat(plng) };
+          const modifyPosition = { lat: parseFloat(plat - 0.00125), lng: parseFloat(plng) };
           map.panTo(modifyPosition);
           map.setZoom(18);
         }

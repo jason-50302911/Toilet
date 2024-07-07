@@ -122,7 +122,7 @@ const InfoWindow = ({ liffObject }) => {
                                     {navURL && 
                                         <button className="naviBtn">
                                             <a id="navigate" href={navURL}>
-                                                <span style={{ "fontSize": "17px", "textAlign": "center"}}>GO</span>
+                                                <span style={{ "fontSize": "26px", "textAlign": "center", "fontWeight": "bold" }}>GO</span>
                                             </a>
                                         </button>}
                                 </div>

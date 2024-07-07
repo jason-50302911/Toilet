@@ -165,7 +165,7 @@ body {
   color: whitesmoke;
   background-color: hsl(180, 38%, 56%);
   box-shadow: 1px 2px 7px hsl(0, 0%, 30%);
-  border-radius: 0 20px 20px 0;
+  border-radius: 20px 20px 0 0;
   padding: 1rem;
   overflow-y: auto;
 }
@@ -283,8 +283,8 @@ body {
 
 
 .naviBtn {
-  width: 45px;
-  height: 25px;
+  width: 60px;
+  height: 35px;
   border-radius: 10px;
   border: none;
   background-color: hsl(211, 56%, 53%);
@@ -294,7 +294,6 @@ body {
 .smallWindow a{
   text-decoration: none;
   color: white;
-  font-size: 1rem;
 }
 
 
@@ -357,7 +356,7 @@ body {
   padding: 0.5rem;
   min-width: 1%;
   height: 70%;
-  top: 200px;
+  top: 150px;
   right: 0px;
   background-color: transparent;
 }
@@ -494,7 +493,7 @@ body {
     position: absolute;
     box-shadow: 0 0 7px hsl(0, 0%, 30%);
     min-width: 100vw;
-    height: 45vh;
+    height: 54vh;
     bottom: 0px;
     left: 0px;
     background-color: hsl(180, 45%, 60%);
@@ -507,14 +506,34 @@ body {
     position: absolute;
     width: 100%;
     min-width: 100vw;
-    height: 43vh;
+    height: 51vh;
     bottom: 0px;
     color: hsl(0, 0%, 100%);
     box-shadow: none;
     border-radius: none;
     background-color: hsl(180, 45%, 60%);
-    padding: 0.3rem 0.9rem 0.3rem 0.9rem;
+    padding: 0 0.9rem 0.3rem 0.9rem;
   }
+
+  .toiletPage {
+    left: 0;
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+    min-width: 100vw;
+    height: 51vh;
+    bottom: 0px;
+    color: hsl(0, 0%, 100%);
+    box-shadow: none;
+    border-radius: none;
+    background-color: hsl(180, 45%, 60%);
+    padding: 0.9rem;
+  }
+
+
+  .infoWindow h1 {
+    font-size: 1.6rem;
+  };
 
   .floorBtnContainer {
     margin: 0;
@@ -545,7 +564,7 @@ body {
   }
   
   .smallWindow {
-    margin: 0.3rem;
+    margin-left: 0.3rem;
     display: grid;
     grid-template-columns: 6fr 1fr;
     align-items: cent
@@ -557,7 +576,7 @@ body {
 
   .infoWindow::-webkit-scrollbar-track {
     background-color: transparent;
-    margin: 2px 0 2px 0;
+    margin: 10px 0 2px 0;
   }
 
   .toiletActname {
@@ -569,17 +588,17 @@ body {
     box-shadow: none;
     z-index: 11;
     position: absolute;
-    bottom: 42vh;
+    bottom: 50.3vh;
     left: calc(50% - 7.5px);
-    width: 15px;
-    height: 0;
+    width: 30px;
+    height: 30px;
     background-color: transparent;
     display: flex; 
+    font-size: 1.7rem;
     justify-content: center;
     align-items: flex-end;
-    font-size: 1.2rem;
     color: whitesmoke;
-    border-radius: 10px 10px 0px 0;
+    border-radius: 10px;
     cursor: pointer;
   }
 
@@ -595,7 +614,7 @@ body {
     height: 45px;
     justify-content: center;
     align-items: flex-start;
-    font-size: 1.3rem;
+    font-size: 1.7rem;
     color: whitesmoke;
     border-radius: 10px 10px 0 0;
     cursor: pointer;
@@ -630,36 +649,6 @@ body {
     width: 100vw;
     height: 92vh;
   }
-
-  /* .markers {
-    width: 35px;
-    height: 35px;
-    border: 2px solid hsl(225, 48%, 38%);
-    border-radius: 50%;
-    background-color: hsl(203, 100%, 73%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    color: white;
-    transition: all 0.3s ease-out;
-  }
-
-  .clickMarker {
-    z-index: 20;
-    position: absolute;
-    width: 45px;
-    height: 425px;
-    border: 2px solid hsla(289, 97%, 26%, 0.415);
-    border-radius: 50%;
-    background-color: hsl(350, 100%, 71%);;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    color: white;
-    transition: all 0.3s ease-out;
-  } */
 
   .selectForm {
     z-index: 10;
@@ -710,7 +699,6 @@ body {
     font-weight: bold;
     background-color: hsl(0, 100%, 76%);
     border: none;
-    /* border: 3px solid hsl(25, 63%, 48%); */
     border-radius: 10px;
     transition: all 0.3s ease-out;
     cursor: pointer;
