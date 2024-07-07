@@ -13,7 +13,6 @@ const Markers = () => {
     const map = useMap();
 
     const toilets = useStoreState((state) => state.toilets);
-    const display = useStoreState((state) => state.display);
     const type = useStoreState((state) => state.type);
     const clickNumber = useStoreState((state) => state.clickNumber);
     const renderToilets = useStoreState((state) => state.renderToilets);
@@ -72,9 +71,9 @@ const Markers = () => {
               {renderToilets.map((point) => (
                 <AdvancedMarker
                   position={{lat: parseFloat(point.lat), lng: parseFloat(point.lng)}}
-                  className={display ? "markerContainer" : "notDisplay"}
+                  className={"markerContainer"}
                   key={point.uuid}
-                    onClick={() => handleOnClick(point)}>
+                  onClick={() => handleOnClick(point)}>
                   <MarkerIcon
                     point={point}
                     clickNumber={clickNumber}>

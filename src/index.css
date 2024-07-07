@@ -66,11 +66,11 @@ body {
 }
 
 .markers {
-  width: 1.8rem;
-  height: 1.8rem;
-  border: 0.1rem solid hsl(335, 55%, 60%);
+  width: 30px;
+  height: 30px;
+  border: 2px solid #6375ab;
   border-radius: 50%;
-  background-color:hsl(0, 100%, 29%);
+  background-color:hsl(203, 100%, 73%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,21 +80,20 @@ body {
 }
 
 .markers:hover{
-  width: 3rem;
-  height: 3rem;
-  font-size: 2rem;
-  background-color: hsl(335, 55%, 60%);
-  border: 0.2rem solid hsla(289, 89%, 35%, 0.415);
+  width: 30px;
+  height: 30px;
+  background-color: hsl(350, 70%, 71%);
+  border: 2px solid hsla(289, 89%, 35%, 0.415);
 }
 
 .clickMarker {
   z-index: 20;
   position: absolute;
-  width: 3rem;
-  height: 3rem;
-  border: 5px solid hsl(260, 100%, 73%);
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background-color:hsl(210, 97%, 62%);
+  background-color: hsl(350, 100%, 71%);
+  border: 2px solid hsla(289, 97%, 26%, 0.415);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -157,6 +156,10 @@ body {
   background-color: hsla(0, 0%, 100%, 0.903);
 }
 
+.infoWindow h1 {
+  font-size: 1.8rem;
+}
+
 .controlWindow {
   box-shadow: 0 0 7px hsl(0, 0%, 30%);
   z-index: 9;
@@ -192,44 +195,70 @@ body {
 }
 
 
+.toiletWithBtn {
+  margin-top: 0.6rem;
+  padding: 0.5rem;
+  color: whitesmoke;
+  border: 2.7px solid hsl(0, 0%, 100%);
+  border-radius: 10px;
+  align-items: center;
+}
+
 .toilet {
   margin-top: 0.6rem;
   padding: 0.5rem;
   color: whitesmoke;
   border: 2.7px solid hsl(0, 0%, 100%);
   border-radius: 10px;
+  align-items: center;
 }
 
-.toilet h2 {
+.toiletActname {
   font-size: 1rem;
+  color: hsl(0, 0%, 93%);
+}
+
+.toiletWithBtn a{
+  text-decoration: none;
 }
 
 .toilet a{
   text-decoration: none;
-  color: hsl(0, 0%, 93%);
+}
+
+.liffBtn {
+  width: 70px;
+  height: 25px;
+  float: right;
+  border-radius: 10px;
+  margin-left: 0.3rem; 
+  background-color: hsl(350, 70%, 71%);
+  color: hsl(0, 0%, 96%);
+  border: none;
+  text-align: center;
+  box-shadow: 1px 1px 1px hsl(0, 0%, 39%);
+  cursor: pointer;
 }
 
 .smallWindow {
-  display: flex;
-  justify-content: space-between;
+  margin: 0.3rem;
+  display: grid;
+  grid-template-columns: 6fr 1fr;
   align-items: center;
 }
 
-.infoDetails h1{
-  font-size: 1.6rem;
-}
-
 .infoDetails p{
-  font-size: 0.7rem;
+  font-size: 0.67rem;
 }
 
-.smallWindow button {
-  width: 60px;
-  height: 40px;
-  border-radius: 8px;
+
+.naviBtn {
+  width: 45px;
+  height: 25px;
+  border-radius: 10px;
   border: none;
   background-color: hsl(211, 56%, 53%);
-  box-shadow: 1px 2px 3px;
+  box-shadow: 1px 1.5px 1.5px hsl(0, 0%, 39%);
 }
 
 .smallWindow a{
@@ -244,11 +273,11 @@ body {
 }
 
 .pushedFloorBtn {
-  margin: 0.25rem;
-  width: 3rem;
-  height: 1.5rem;
-  font-size: 1rem;
-  background-color: hsl(350, 100%, 78%);
+  margin: 0.2rem;
+  width: 2rem;
+  height: 1.2rem;
+  font-size: 0.8rem;
+  background-color: hsl(350, 70%, 71%);
   color: white;
   border-radius: 7px;
   border: none;
@@ -257,10 +286,10 @@ body {
 
 .floorBtn {
   margin: 0.2rem;
-  width: 2.5rem;
-  height: 1.5rem;
-  font-size: 1rem;
-  background-color: hsl(350, 60%, 65%);
+  width: 2rem;
+  height: 1.2rem;
+  font-size: 0.8rem;
+  background-color: hsl(350, 60%, 64%);
   color: white;
   border-radius: 7px;
   border: none;
@@ -454,7 +483,7 @@ body {
     box-shadow: none;
     border-radius: none;
     background-color: hsl(180, 45%, 60%);
-    padding: 0.3rem 0.7rem 0.3rem 0.7rem;
+    padding: 0.3rem 0.9rem 0.3rem 0.9rem;
   }
 
   .floorBtnContainer {
@@ -486,19 +515,14 @@ body {
   }
   
   .smallWindow {
-    position: sticky;
-    margin-top: 0.3rem;
-    bottom: 42vh;
-  }
-  
-  .smallWindow h2 {
-    font-size: 1.3rem;
-    margin-bottom: 0.4rem;
-    color: white;
+    margin: 0.3rem;
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+    align-items: cent
   }
 
   .smallWindow p {
-    font-size: 0.7rem;
+    font-size: 0.67rem;
   }
 
   .infoWindow::-webkit-scrollbar-track {
@@ -506,8 +530,9 @@ body {
     margin: 2px 0 2px 0;
   }
 
-  .toilet h2 {
+  .toiletActname {
     font-size: 0.9rem;
+    color: hsl(0, 0%, 93%);
   }
 
   .controlWindow {
@@ -577,11 +602,11 @@ body {
   }
 
   .markers {
-    width: 1.6rem;
-    height: 1.6rem;
-    border: 2px solid hsl(335, 55%, 60%);
+    width: 30px;
+    height: 30px;
+    border: 2px solid hsl(225, 48%, 38%);
     border-radius: 50%;
-    background-color:hsl(0, 100%, 29%);
+    background-color: hsl(203, 100%, 73%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -593,11 +618,11 @@ body {
   .clickMarker {
     z-index: 20;
     position: absolute;
-    width: 2rem;
-    height: 2rem;
-    border: 3.5px solid hsl(260, 100%, 73%);
+    width: 40px;
+    height: 40px;
+    border: 2px solid hsla(289, 97%, 26%, 0.415);
     border-radius: 50%;
-    background-color:hsl(210, 97%, 62%);
+    background-color: hsl(350, 100%, 71%);;
     display: flex;
     align-items: center;
     justify-content: center;

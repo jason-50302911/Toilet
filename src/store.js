@@ -2,8 +2,8 @@ import { createStore, action, thunk, computed } from "easy-peasy";
 import axios from 'axios';
 import qs from 'qs';
 
-const URL = process.env.REACT_APP_BACKEND_URL;
-// const URL = "http://192.168.100.169:5000"
+// const URL = process.env.REACT_APP_BACKEND_URL;
+const URL = "http://192.168.100.169:5000"
 
 export default createStore({
     toilets: [],
@@ -30,6 +30,10 @@ export default createStore({
     setPlace: action((state, payload) => {
         state.place = payload;
     }),
+    bounds: null,
+    setBounds: action((state, payload) => {
+        state.bounds = payload;
+    }),
     distance: null,
     setDistance: action((state, payload) => {
         state.distance = payload;
@@ -49,10 +53,6 @@ export default createStore({
     nowCenter: null,
     setNowCenter: action((state, payload) => {
         state.nowCenter = payload;
-    }),
-    display: true,
-    setDisplay: action((state, payload) => {
-        state.display = payload;
     }),
     infoWinState: null,
     setInfoWinState: action((state, payload) => {

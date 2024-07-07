@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const useAxiosFetch = (dataUrl, location, mode) => {
+const useAxiosFetch = (dataUrl, location, bounds,  mode) => {
     const [toiletData, setToiletData] = useState([]);
     const [nearToilet, setNearToilet] = useState(null);
     const [distance, setDistance] = useState(null);
@@ -13,7 +13,7 @@ const useAxiosFetch = (dataUrl, location, mode) => {
         let isMounted = true;
         const source = axios.CancelToken.source();
 
-        const fetchData = async (url, location, mode) => {
+        const fetchData = async (url, location, bounds, mode) => {
             setIsLoading(true);
             try {
                 let response = null;
@@ -26,15 +26,18 @@ const useAxiosFetch = (dataUrl, location, mode) => {
                             lng: location.lng
                         }
                     })
-                } else {
+                } else if (bounds) {
                     response = await axios.get(url, {
                         cancelToken: source.token,
                         params: {
                             target: "toilets",
-                            lat: location.lat,
-                            lng: location.lng
+                            latNorth: bounds.latNorth,
+                            latSouth: bounds.latSouth,
+                            lngWest: bounds.lngWest,
+                            lngEast: bounds.lngEast,
                         }
                     })
+                    console.log(response.data);
                 }
                 if (isMounted) {
                     if(mode === "finding"){
@@ -45,8 +48,10 @@ const useAxiosFetch = (dataUrl, location, mode) => {
                         setNearLoc(res.near_loc);
                         setFetchError(null);
                         console.log(res)
-                    } else setToiletData(response.data);
-                    
+                    } else {
+                        console.log(response.data);
+                        setToiletData(response.data);
+                    }
                 }
             } catch (err) {
                 if (isMounted) {
@@ -58,7 +63,7 @@ const useAxiosFetch = (dataUrl, location, mode) => {
             }
         }
 
-        fetchData(dataUrl, location, mode);
+        fetchData(dataUrl, location, bounds, mode);
 
         const cleanUp = () => {
             isMounted = false;
@@ -66,7 +71,7 @@ const useAxiosFetch = (dataUrl, location, mode) => {
         }
 
         return cleanUp;
-    }, [dataUrl, location, mode]);
+    }, [dataUrl, location, bounds, mode]);
 
     return { toiletData, nearToilet, nearLoc, distance, fetchError, isLoading };
 }

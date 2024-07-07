@@ -17,10 +17,22 @@ const Maps = ({ distance })  => {
 
     const { width } = useWindowSize();
 
-    const setDisplay = useStoreActions((actions) => actions.setDisplay);
     const setNowCenter = useStoreActions((actions) => actions.setNowCenter);
     const setMode = useStoreActions((actions) => actions.setMode);
     const setMapCenter = useStoreActions((actions) => actions.setMapCenter);
+    const setBounds = useStoreActions((actions) => actions.setBounds);
+
+    const TAIWAN_LATLNG = {
+      north: 26,
+      south: 21,
+      west: 117,
+      east: 124
+    };
+
+    const TAIWAN_RESTRICT = {
+      latLngBounds: TAIWAN_LATLNG,
+      strictBounds: false
+    }
 
     const initMap = useCallback(([nlat, nlng]) => {
       if (infoWinState){
@@ -29,9 +41,10 @@ const Maps = ({ distance })  => {
       } else setMapCenter({ lat: parseFloat(nlat), lng: parseFloat(nlng) })
     }, [setMapCenter, infoWinState, width]);
 
-    const debounce = _.debounce((_changeCenter) => {
+    const debounce = _.debounce((_changeCenter, _changeBounds) => {
         setNowCenter(_changeCenter); 
-      }, 250);
+        setBounds(_changeBounds);
+      }, 300);
 
 
     useEffect(() => {
@@ -59,13 +72,15 @@ const Maps = ({ distance })  => {
 
     const handleCameraChange = (event) => {
       const presentCenter = event.detail.center;
-      const zoomSize = event.detail.zoom;
-      if (zoomSize > 13) {
-        debounce(presentCenter);
-        setMode('moving');
-      }
-      if (zoomSize < 13) setDisplay(false);
-      else setDisplay(true);
+      const mapBounds = event.detail.bounds
+      const settingBounds = {
+        latNorth: mapBounds.north,
+        latSouth: mapBounds.south,
+        lngEast: mapBounds.east,
+        lngWest: mapBounds.west
+      };
+      debounce(presentCenter, settingBounds);
+      setMode('moving');
     }
 
 
@@ -78,8 +93,10 @@ const Maps = ({ distance })  => {
                     defaultZoom={defZoom}
                     defaultCenter={mapCenter}
                     mapId={"49ae42fed52588c3"}
-                    disableDefaultUI={"true"}
+                    disableDefaultUI={true}
                     mapTypeId={"roadmap"}
+                    restriction={TAIWAN_RESTRICT}
+                    clickableIcons={false}
                     onCameraChanged={event => handleCameraChange(event)}>
                     <Markers/>
                     <BackToInit/>

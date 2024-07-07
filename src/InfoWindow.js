@@ -25,6 +25,7 @@ const InfoWindow = ({ liffObject }) => {
     const [floorList, setFloorList] = useState([]);
     const [displayToilet, setDisplayToilet] = useState([]);
     const [navURL, setNavURL] = useState(null);
+    const [patterns, setPatterns] = useState(null);
 
     const day = useGetDay();
     const { width } = useWindowSize();
@@ -53,6 +54,7 @@ const InfoWindow = ({ liffObject }) => {
                 setToiletName(information.name);
                 setToiletAddress(information.address);
                 setDisplayToilet(filterToilet);
+                setPatterns(information.patterns);
                 setNavURL(`https://www.google.com/maps/dir/?api=1&origin=${orlat},${orlng}&destination=${information.lat}, ${information.lng}&travelmode=driving`);
             }
         }
@@ -99,16 +101,6 @@ const InfoWindow = ({ liffObject }) => {
         };
     }
 
-    const handleLiff = () => {
-        if (liffObject) {
-            liffObject.sendMessages([{
-                type: "text",
-                text: "Send Messages",
-            }, ]);
-            liffObject.closeWindow();
-        } 
-    }
-
     return (
         <>
             {displayToilet.length !== 0 &&
@@ -120,21 +112,19 @@ const InfoWindow = ({ liffObject }) => {
                             {width > 800 ? <FaAngleLeft/> : <FaAngleDown/>}
                         </div>
                             <div className="infoWindow">
+                                <h1>{toiletName}</h1>
                                 <div className="smallWindow">
                                     <div className="infoDetails">
-                                        <h1>{toiletName}</h1>
                                         <p>{toiletAddress}</p>
                                         <p>開放時間: {week[day]}  8:00 - 17:00</p>
+                                        <p>使用模式: {patterns}</p>
                                     </div>
-                                    {liffObject && 
-                                        <button onClick={handleLiff}>
-                                            Send Message & Close Window
-                                        </button>}
                                     {navURL && 
                                         <button className="naviBtn">
-                                            <a id="navigate" href={navURL}>GO</a>
-                                        </button>
-                                    }
+                                            <a id="navigate" href={navURL}>
+                                                <span style={{ "fontSize": "17px", "textAlign": "center"}}>GO</span>
+                                            </a>
+                                        </button>}
                                 </div>
                                 <div className="floorBtnContainer">
                                     {floorList.map((floor) => (
@@ -159,6 +149,7 @@ const InfoWindow = ({ liffObject }) => {
                                     <Toilet 
                                         key={toilet.number} 
                                         toilet={toilet}
+                                        liffObject={liffObject}
                                     />
                                 )))}
                             </div>

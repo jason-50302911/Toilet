@@ -1,11 +1,34 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
 
-const Toilet = ({ toilet }) => {
+const Toilet = ({ toilet, liffObject }) => {
+  const [btn, setBtn] = useState(null);
+
+  useEffect(() => {
+    if (toilet.patterns === "收費廁所") setBtn("toiletWithBtn");
+    else setBtn("toilet")
+  }, [liffObject, toilet]);
+
+  const handleLiff = () => {
+    if (liffObject) {
+        liffObject.sendMessages([{
+            type: "text",
+            text: "Send Messages",
+        }, ]);
+        liffObject.closeWindow();
+    } 
+  }
   return (
-    <div className="toilet">
+    <div className={btn}>
         <Link to={`/toiletPage/${toilet.number}`}>
-            <h2>{toilet.actname}</h2>
+            <span className="toiletActname">{toilet.actname}</span>
         </Link>
+        {btn === "toiletWithBtn" &&
+            <button 
+              className="liffBtn"
+              onClick={handleLiff}>點擊付費
+            </button>
+        }
     </div>
   )
 }

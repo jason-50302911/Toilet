@@ -18,15 +18,16 @@ import Finding from './Finding';
 function App() {
   const nowCenter = useStoreState((state) => state.nowCenter);
   const mode = useStoreState((state) => state.mode);
+  const bounds = useStoreState((state) => state.bounds);
   
   const setToilets = useStoreActions((actions) => actions.setToilets);
   const setNowCenter = useStoreActions((actions) => actions.setNowCenter);
   const setInitLocation = useStoreActions((actions) => actions.setInitLocation);
 
-  const URL = process.env.REACT_APP_BACKEND_URL;
-  // const URL = "http://192.168.100.169:5000"
+  // const URL = process.env.REACT_APP_BACKEND_URL;
+  const URL = "http://192.168.100.169:5000"
 
-  const { toiletData, nearToilet, nearLoc, distance } = useAxiosFetch(URL, nowCenter, mode);
+  const { toiletData, nearToilet, nearLoc, distance } = useAxiosFetch(URL, nowCenter, bounds, mode);
   
   const location = useGeoLocation();
 
