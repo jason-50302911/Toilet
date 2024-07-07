@@ -8,6 +8,7 @@ import { useStoreState } from "easy-peasy";
 import MarkerIcon from "./MarkerIcon";
 import useWindowSize from './hooks/useWindowSize';
 import { FaArrowCircleDown } from "react-icons/fa";
+import SelfPin from "./images/selfLocPin.png";
 
 const Markers = () => {
     const map = useMap();
@@ -65,7 +66,8 @@ const Markers = () => {
             <div>
               <AdvancedMarker position={{ lat: parseFloat(initLocation.lat), lng: parseFloat(initLocation.lng) }}>
                 <span className="nowLocation">
-                  <FaArrowCircleDown/>
+                  <img src={SelfPin}
+                          alt="smallogo" width="46.08" height="57.96" title="Logo"/>
                 </span>
               </AdvancedMarker>
               {renderToilets.map((point) => (

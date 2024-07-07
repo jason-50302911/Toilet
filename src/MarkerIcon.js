@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { FaRestroom } from "react-icons/fa";
 import ToiletPin from "./images/toiletPin.png";
 
 const MarkerIcon = ({ point, clickNumber }) => {
