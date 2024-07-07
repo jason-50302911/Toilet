@@ -1,8 +1,12 @@
 import { useState } from 'react';
-import { FaRestroom } from "react-icons/fa";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import useWindowSize from './hooks/useWindowSize';
-import CatLogo from "./images/catLogo8.png";
+import Friendly from "./images/friendly.png";
+import Handicap from "./images/handicap.png";
+import Man from "./images/man.png";
+import Parent from "./images/parent.png";
+import Woman from "./images/woman.png";
+import Mixed from "./images/mixed.png";
 
 const SelectTypeForm = () => {
     const [word, setWord] = useState('');
@@ -50,8 +54,18 @@ const SelectTypeForm = () => {
                                 <button 
                                     className={type.includes(number) ? "btnFocus" : "btn"}
                                     onClick={() => handleBtnClick(number)}>
-                                    <img src={CatLogo}
-                                        alt="smallogo" width="29.95" height="37" title="Logo"/>
+                                        {number === "1" ? (<img src={Man}
+                                                            alt="man" width="31.35" height="37.4" title="man"/>):
+                                            number === "2" ?  (<img src={Woman}
+                                                                alt="woman" width="31.35" height="37.4" title="woman"/>):
+                                                number === "3" ?  (<img src={Parent}
+                                                                    alt="parent" width="31.35" height="37.4" title="parent"/>):
+                                                    number === "4" ?  (<img src={Handicap}
+                                                                        alt="handicap" width="31.35" height="37.4" title="handicap"/>):
+                                                        number === "5" ?  (<img src={Friendly}
+                                                                            alt="friendly" width="31.35" height="37.4" title="friendly"/>):
+                                                            (<img src={Mixed} alt="mixed" width="31.35" height="37.4" title="mixed"/>)
+                                        }
                                 </button>
                             </li>))
                         }

@@ -19,11 +19,11 @@ const Toilet = ({ toilet, liffObject }) => {
     } 
   }
   return (
-    <div className={btn}>
+    <div className={ toilet.patterns === "收費廁所" ? "toilet" : "toiletWithBtn" }>
         <Link to={`/toiletPage/${toilet.number}`}>
             <span className="toiletActname">{toilet.actname}</span>
         </Link>
-        {btn === "toiletWithBtn" &&
+        {toilet.patterns === "收費廁所" &&
             <button 
               className="liffBtn"
               onClick={handleLiff}>點擊付費
