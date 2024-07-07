@@ -37,7 +37,6 @@ const useAxiosFetch = (dataUrl, location, bounds,  mode) => {
                             lngEast: bounds.lngEast,
                         }
                     })
-                    console.log(response.data);
                 }
                 if (isMounted) {
                     if(mode === "finding"){
@@ -47,9 +46,7 @@ const useAxiosFetch = (dataUrl, location, bounds,  mode) => {
                         setDistance(res.distance);
                         setNearLoc(res.near_loc);
                         setFetchError(null);
-                        console.log(res)
                     } else {
-                        console.log(response.data);
                         setToiletData(response.data);
                     }
                 }
