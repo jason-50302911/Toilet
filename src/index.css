@@ -165,7 +165,7 @@ body {
   color: whitesmoke;
   background-color: hsl(180, 38%, 56%);
   box-shadow: 1px 2px 7px hsl(0, 0%, 30%);
-  border-radius: 20px 20px 0 0;
+  border-radius: 0 20px 20px 0;
   padding: 1rem;
   overflow-y: auto;
 }
@@ -187,7 +187,7 @@ body {
 }
 
 .infoWindow h1 {
-  font-size: 1.8rem;
+  font-size: 1.55rem;
 }
 
 .controlWindow {
@@ -224,9 +224,27 @@ body {
   cursor: pointer;
 }
 
+.infoForm {
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-top: 2px solid whitesmoke;
+  border-bottom: 2px solid whitesmoke; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.toiletList {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
 
 .toiletWithBtn {
-  margin-top: 0.6rem;
   padding: 0.5rem;
   color: whitesmoke;
   border: 2.7px solid hsl(0, 0%, 100%);
@@ -235,17 +253,18 @@ body {
 }
 
 .toilet {
-  margin-top: 0.6rem;
-  padding: 0.5rem;
-  color: whitesmoke;
-  border: 2.7px solid hsl(0, 0%, 100%);
+  width: 90%;
+  padding: 0.4rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  min-height: 80px;
+  border: 2px solid whitesmoke;
   border-radius: 10px;
-  align-items: center;
 }
 
 .toiletActname {
-  font-size: 1rem;
-  color: hsl(0, 0%, 93%);
+  font-size: 0.8rem;
+  color: whitesmoke;
 }
 
 .toiletWithBtn a{
@@ -254,6 +273,19 @@ body {
 
 .toilet a{
   text-decoration: none;
+}
+
+.toiletLookBtn {
+  background-color: hsl(209, 58%, 40%);
+  color: whitesmoke;
+  border: none;
+  border-radius: 15px;
+  width: 70px;
+  font-weight: 500;
+  font-size: 0.6rem; 
+  padding: 0.3rem;
+  box-shadow: 1px 1.5px 1.5px hsl(0, 0%, 39%);
+  cursor: pointer;
 }
 
 .liffBtn {
@@ -283,12 +315,21 @@ body {
 
 
 .naviBtn {
-  width: 60px;
-  height: 35px;
-  border-radius: 10px;
+  width: 80px;
+  height: 40px;
+  border-radius: 15px;
   border: none;
-  background-color: hsl(211, 56%, 53%);
+  padding: 10px;
+  background-color: hsl(209, 58%, 40%);
   box-shadow: 1px 1.5px 1.5px hsl(0, 0%, 39%);
+}
+
+.navContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
 }
 
 .smallWindow a{
@@ -297,17 +338,17 @@ body {
 }
 
 
-.floorBtnContainer {
-  margin: 0.3rem;
+.floorBtnContainer { 
+  margin-bottom: 0.3rem;
 }
 
 .pushedFloorBtn {
   margin: 0.2rem;
-  width: 2rem;
+  min-width: 2rem;
   height: 1.2rem;
   font-size: 0.8rem;
-  background-color: hsl(350, 70%, 71%);
-  color: white;
+  background-color: hsl(209,65%, 50%);
+  color: whitesmoke;
   border-radius: 7px;
   border: none;
   cursor: pointer;
@@ -318,17 +359,10 @@ body {
   width: 2rem;
   height: 1.2rem;
   font-size: 0.8rem;
-  background-color: hsl(350, 60%, 64%);
-  color: white;
+  background-color: hsl(205, 66%, 35%);
+  color: whitesmoke;
   border-radius: 7px;
   border: none;
-  cursor: pointer;
-}
-
-.toiletTypeContainer {
-  display: grid;
-  margin: 0;
-  grid-template-columns: 1fr 1fr 1fr;
   cursor: pointer;
 }
 
@@ -427,9 +461,19 @@ body {
   cursor: pointer;
 }
 
+.toiletTypeContainer {
+  display: flex;
+  margin: 0;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .toiletSection {
   border: 2.5px solid hsl(0, 0%, 100%);
   border-radius: 13px;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 15px;
   list-style: none;
   padding: 0.3rem;
   margin: 0.25rem;
@@ -439,21 +483,23 @@ body {
   align-items: center;
   font-size: 1.5rem;
   font-weight: bold;
+  cursor: pointer;
 }
 
 
 .nonToiletSection {
-  border: 2px solid hsla(0, 5%, 25%, 0.327);
+  border: 2px solid hsla(0, 0%, 35%, 0.327);
   border-radius: 13px;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 15px;
   list-style: none;
   padding: 0.3rem;
   margin: 0.25rem;
   display: flex;
-  color:  hsla(0, 5%, 25%, 0.327);;
-  flex-direction: column;
+  color:  hsla(0, 0%, 35%, 0.327);;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
   font-size: 1.5rem;
 }
 
@@ -493,7 +539,7 @@ body {
     position: absolute;
     box-shadow: 0 0 7px hsl(0, 0%, 30%);
     min-width: 100vw;
-    height: 54vh;
+    height: 54.3vh;
     bottom: 0px;
     left: 0px;
     background-color: hsl(180, 45%, 60%);
@@ -532,6 +578,7 @@ body {
 
 
   .infoWindow h1 {
+    margin: 0.3rem;
     font-size: 1.6rem;
   };
 
@@ -544,7 +591,7 @@ body {
     width: 2rem;
     height: 1rem;
     font-size: 0.7rem;
-    background-color: hsl(350, 100%, 78%);
+    background-color: hsl(212, 100%, 70%);
     color: white;
     border-radius: 7px;
     border: none;
@@ -556,7 +603,7 @@ body {
     width: 2rem;
     height: 1rem;
     font-size: 0.7rem;
-    background-color: hsl(350, 60%, 65%);
+    background-color: hsl(205, 66%, 35%);
     color: white;
     border-radius: 7px;
     border: none;
@@ -567,7 +614,7 @@ body {
     margin-left: 0.3rem;
     display: grid;
     grid-template-columns: 6fr 1fr;
-    align-items: cent
+    align-items: center;
   }
 
   .smallWindow p {
@@ -588,7 +635,7 @@ body {
     box-shadow: none;
     z-index: 11;
     position: absolute;
-    bottom: 50.3vh;
+    bottom: 50.2vh;
     left: calc(50% - 7.5px);
     width: 30px;
     height: 30px;
@@ -709,8 +756,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    height: 2rem;
+    width: 50px;
+    height: 50px;
     color: whitesmoke;
     font-size: 1.5rem;
     font-weight: bold;
@@ -769,7 +816,7 @@ body {
   .openBackInit {
     position: absolute;
     right: 5px;
-    bottom: 46vh;
+    bottom: 55.3vh;
     width: 45px;
     height: 45px;
     display: flex;

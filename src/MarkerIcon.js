@@ -9,7 +9,7 @@ const MarkerIcon = ({ point, clickNumber }) => {
         <Link to={`/place/${point.uuid}`}>
             <span className={point.uuid === clickNumber ? "clickMarker": 
                     point.patterns === "收費廁所" ? "yellowMarker":
-                        point.patterns === "開放借用" ? "deepBlueMarker": 
+                        point.patterns === "友善借用" ? "deepBlueMarker": 
                             point.patterns === "店內消費使用" ? "greenMarker": "markers"
             }>
                 {clickNumber === point.uuid  ? 

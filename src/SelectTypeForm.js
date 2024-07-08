@@ -47,8 +47,8 @@ const SelectTypeForm = () => {
                             <li 
                                 key={number}
                                 id={toiletTw}
-                                onMouseOut={() => setWord('')}
-                                onMouseOver={() => setWord(number)}
+                                onTouchEnd={() => setTimeout(() => setWord(''), 500)}
+                                onTouchStart={() => setWord(number)}
                                 className="selectContainer">
                                 { width > 800 && <p className={number === word ? "displayWord" : "nonDisplay"}>{toiletType[word]}</p>}
                                 <button 

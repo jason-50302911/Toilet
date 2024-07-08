@@ -3,19 +3,22 @@ import Toilet from './Toilet';
 import { useState, useEffect } from 'react';
 import useGetDay from './hooks/useGetDay';
 import { FaRestroom, FaAngleLeft, FaAngleDown, FaAngleRight, FaAngleUp } from 'react-icons/fa';
+import { IoNavigateSharp } from "react-icons/io5";
 import useWindowSize from './hooks/useWindowSize';
+import _ from 'lodash';
 
 
 const InfoWindow = ({ liffObject }) => {
-
     const searchResult = useStoreState((state) => state.searchResult);
     const renderToilets = useStoreState((state) => state.renderToilets);
     const clickNumber = useStoreState((state) => state.clickNumber);
     const infoWinState = useStoreState((state) => state.infoWinState);
     const initLocation = useStoreState((state) => state.initLocation);
+    const type = useStoreState((state) => state.type);
 
     const findingSearchId = useStoreActions((actions) => actions.findingSearchId);
     const setInfoWinState = useStoreActions((actions) => actions.setInfoWinState);
+    const setType = useStoreActions((actions) => actions.setType);
     
     const [preClickNumber, setPreClickNumber] = useState(null);
     const [clickFloor, setClickFloor] = useState([]);
@@ -34,6 +37,7 @@ const InfoWindow = ({ liffObject }) => {
     const week = { 0: "星期日", 1: "星期一", 2: "星期二", 3: "星期三", 4: "星期四", 5: "星期五", 6: "星期六" };
     
     useEffect(() => {
+
         const numberList = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
         if (clickNumber) {
             const information = renderToilets.find((toilet) => toilet.uuid === clickNumber);
@@ -50,7 +54,6 @@ const InfoWindow = ({ liffObject }) => {
                 });
                 setFloorList(information.floorList.sort());
                 setNumberToilet(numberList); 
-                console.log(filterToilet);
                 setToiletName(information.name);
                 setToiletAddress(information.address);
                 setDisplayToilet(filterToilet);
@@ -77,7 +80,6 @@ const InfoWindow = ({ liffObject }) => {
         }
     }, [displayToilet, findingSearchId]);
 
-
     const handleFloorClick = (floor) => {
         const floorLength = floorList.length;
         let newClickList = [];
@@ -101,17 +103,31 @@ const InfoWindow = ({ liffObject }) => {
         };
     }
 
+    const handleClick = (number, isExisted) => {
+        let typeList = [];
+        if (type.includes(number)) {
+            typeList =  type.filter((typeNumber) => typeNumber !== number);
+        } else if(isExisted)  {
+            if (type.length >= 5) return;
+            typeList = [...type, number];
+        };
+        console.log(typeList);
+        setType(typeList);
+    }
+
+
     return (
         <>
             {displayToilet.length !== 0 &&
                 infoWinState === "idle" ?
                     <div className="infoContainer">
-                        <div 
+                        <div
                             className="controlWindow"
                             onClick={clickCloseBtn}>
                             {width > 800 ? <FaAngleLeft/> : <FaAngleDown/>}
                         </div>
-                            <div className="infoWindow">
+                            <div 
+                                className="infoWindow">
                                 <h1>{toiletName}</h1>
                                 <div className="smallWindow">
                                     <div className="infoDetails">
@@ -122,7 +138,9 @@ const InfoWindow = ({ liffObject }) => {
                                     {navURL && 
                                         <button className="naviBtn">
                                             <a id="navigate" href={navURL}>
-                                                <span style={{ "fontSize": "26px", "textAlign": "center", "fontWeight": "bold" }}>GO</span>
+                                                <span className="navContent">
+                                                    <IoNavigateSharp/> GO
+                                                </span>
                                             </a>
                                         </button>}
                                 </div>
@@ -139,19 +157,16 @@ const InfoWindow = ({ liffObject }) => {
                                     {Object.entries(numberToilet).map(([number, bool]) => (
                                         <li 
                                             className={ bool ? "toiletSection" : "nonToiletSection"}
-                                            key={number}>
+                                            key={number}
+                                            onClick={() => handleClick(number, bool)}>
                                             <FaRestroom/>
-                                            <p>{toiletType[number]}</p>
                                         </li>
                                     ))}
                                 </ul>
-                                {(searchResult.map((toilet) => (
-                                    <Toilet 
-                                        key={toilet.number} 
-                                        toilet={toilet}
-                                        liffObject={liffObject}
-                                    />
-                                )))}
+                                <Toilet
+                                    searchResult={searchResult}
+                                    liffObject={liffObject}
+                                />
                             </div>
                     </div> :  
                     (<div 

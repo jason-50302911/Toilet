@@ -46,13 +46,13 @@ const Markers = () => {
       const plng = point.lng;
       if (map) {
         if (width > 800) {
-          map.panTo({ lat: parseFloat(plat), lng: parseFloat(plng) - 0.0006 });
-          map.setZoom(19);
+          map.panTo({ lat: parseFloat(plat), lng: parseFloat(plng) - 0.00035 });
+          map.setZoom(20);
         }
         else {
-          const modifyPosition = { lat: parseFloat(plat - 0.00125), lng: parseFloat(plng) };
+          const modifyPosition = { lat: parseFloat(plat - 0.00045), lng: parseFloat(plng) };
           map.panTo(modifyPosition);
-          map.setZoom(18);
+          map.setZoom(19.5);
         }
 
         setClickNumber(point.uuid);
