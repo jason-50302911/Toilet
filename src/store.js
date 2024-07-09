@@ -18,6 +18,14 @@ export default createStore({
     setType: action((state, payload) => {
         state.type = payload;
     }),
+    usingType: null,
+    setUsingType: action((state, payload) => {
+        state.usingType = payload;
+    }),
+    storeType: null,
+    setStoreType: action((state, payload) => {
+        state.storeType = payload;
+    }),
     clickNumber: null,
     setClickNumber: action((state, payload) => {
         state.clickNumber = payload;

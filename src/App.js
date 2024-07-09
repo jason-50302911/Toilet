@@ -11,7 +11,9 @@ import Discuss from './Discuss';
 import Map from "./Maps";
 import ToiletPage from './ToiletPage';
 import SelectForm from "./SelectTypeForm";
-import Selected from './Selected';
+import SelectedType from './SelectedType';
+import SelectedUse from './SelectedUse';
+import SelectedStore from './SelectedStore';
 import Finding from './Finding';
 
 
@@ -51,8 +53,10 @@ function App() {
       <Map distance={distance}/>
       <Routes>
         <Route path="/" element={<InfoWindow/>}/>
-        <Route path="/:findmode" element={<Finding nearToilet={nearToilet} nearLoc={nearLoc}/>}/>
-        <Route path="/select/:type" element={<Selected/>}/>
+        <Route path="/:findMode" element={<Finding nearToilet={nearToilet} nearLoc={nearLoc}/>}/>
+        <Route path="/select/type/:type" element={<SelectedType/>}/>
+        <Route path="/select/use/:useType" element={<SelectedUse/>}/>
+        <Route path="/select/store/:storeType" element={<SelectedStore/>}/>
         <Route path="/place/:id" element={<InfoWindow/>}/>
         <Route path="/discuss/:id" element={<Discuss/>}/>
         <Route path="/toiletPage/:id" element={<ToiletPage/>}/>

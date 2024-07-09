@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import InfoWindow from "./InfoWindow";
 
 const Finding = ({ nearLoc, nearToilet }) => {
-    const { findmode } = useParams();
+    const { findMode } = useParams();
     const mode = useStoreState((state) => state.mode);
 
     const setMode = useStoreActions((actions) => actions.setMode);
@@ -14,11 +14,11 @@ const Finding = ({ nearLoc, nearToilet }) => {
     const setUrl = useStoreActions((actions) => actions.setUrl);
 
     useEffect(() => {
-        if (findmode === "finding")  {
+        if (findMode === "finding")  {
             setMode("finding");
-            setUrl(findmode);
+            setUrl(findMode);
         }
-    }, [setMode, findmode, setUrl]);
+    }, [setMode, findMode, setUrl]);
 
     useEffect(() =>{
         if (mode === "finding") {

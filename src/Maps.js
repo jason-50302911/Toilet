@@ -35,15 +35,14 @@ const Maps = ({ distance })  => {
     }
 
     const initMap = useCallback(([nlat, nlng]) => {
-      console.log(infoWinState);
       let pos = null;
       if (infoWinState){
-        if ( width <= 800 && distance < 0.5) pos = { lat: parseFloat(nlat - 0.002), lng: parseFloat(nlng) };
-        else if ( width <= 800 && (distance > 0.5 && distance < 1)) pos = { lat: parseFloat(nlat - 0.0038), lng: parseFloat(nlng) };
-        else if ( width <= 800 &&  distance > 1) {
-          console.log(12);
-          pos = { lat: parseFloat(nlat - 0.01), lng: parseFloat(nlng) };
-        }
+        if ( width <= 800 && distance < 0.5) 
+          pos = { lat: parseFloat(nlat - 0.0018), lng: parseFloat(nlng) };
+        else if ( width <= 800 && (distance > 0.5 && distance < 1)) 
+          pos = { lat: parseFloat(nlat - 0.0038), lng: parseFloat(nlng) };
+        else if ( width <= 800 &&  distance > 1) 
+          pos = { lat: parseFloat(nlat - 0.02), lng: parseFloat(nlng) };
         else pos = { lat: parseFloat(nlat), lng: parseFloat(nlng - 0.003) };
       } else pos = { lat: parseFloat(nlat), lng: parseFloat(nlng) };
       setMapCenter(pos);

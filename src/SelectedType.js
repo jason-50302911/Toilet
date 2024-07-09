@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import InfoWindow from "./InfoWindow";
 
-const Selected = () => {
+const SelectedType = () => {
     const { type } = useParams();
 
     const url = useStoreState((state) => state.url);
@@ -30,4 +30,4 @@ const Selected = () => {
     )
 } 
 
-export default Selected
+export default SelectedType

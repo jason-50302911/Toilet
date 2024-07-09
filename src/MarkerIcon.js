@@ -10,7 +10,7 @@ const MarkerIcon = ({ point, clickNumber }) => {
             <span className={point.uuid === clickNumber ? "clickMarker": 
                     point.patterns === "收費廁所" ? "yellowMarker":
                         point.patterns === "友善借用" ? "deepBlueMarker": 
-                            point.patterns === "店內消費使用" ? "greenMarker": "markers"
+                            point.patterns === "顧客使用" ? "greenMarker": "markers"
             }>
                 {clickNumber === point.uuid  ? 
                     (<img src={ToiletPin}

@@ -2,7 +2,7 @@ import {
     useMap,
     AdvancedMarker
   } from "@vis.gl/react-google-maps";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useStoreActions } from 'easy-peasy';
 import { useStoreState } from "easy-peasy";
 import MarkerIcon from "./MarkerIcon";
@@ -14,17 +14,43 @@ const Markers = () => {
     const map = useMap();
 
     const toilets = useStoreState((state) => state.toilets);
-    const type = useStoreState((state) => state.type);
     const clickNumber = useStoreState((state) => state.clickNumber);
     const renderToilets = useStoreState((state) => state.renderToilets);
     const initLocation = useStoreState((state) => state.initLocation);
     const mapCenter = useStoreState((state) => state.mapCenter);
+    
+    const usingType = useStoreState((state) => state.usingType);
+    const storeType = useStoreState((state) => state.storeType);
+    const type = useStoreState((state) => state.type);
 
     const { width } = useWindowSize();
 
     const setRenderToilets = useStoreActions((actions) => actions.setRenderToilets);
     const setClickNumber = useStoreActions((actions) => actions.setClickNumber);
     const setInfoWinState = useStoreActions((actions) => actions.setInfoWinState);
+
+    const filtering = useCallback((toiletList) => {
+      let sortCategr = null;
+      let sortTarget = null;
+      if (usingType) {
+        sortCategr = usingType;
+        console.log(sortCategr);
+        sortTarget = "patterns";
+      }
+      if (storeType) {
+        sortCategr = storeType;
+        console.log(sortCategr);
+        sortTarget = "type3";
+      }
+      if (sortCategr && toiletList.length !== 0) {
+        console.log(1)
+        return toiletList.filter((toilet) => toilet[sortTarget] === sortCategr);  
+      }
+      else {
+        console.log(toiletList.length)
+        return toiletList 
+      }
+    }, [usingType, storeType]);
 
     useEffect(() => {
       let cpToilet = JSON.parse(JSON.stringify(toilets));
@@ -38,8 +64,10 @@ const Markers = () => {
           } else toilet.aggregate = [...filtered];
         });
       };
-      setRenderToilets(cpToilet);
-    }, [toilets, setRenderToilets, type]);
+      const filCpToilet = filtering(cpToilet);
+      console.log(filCpToilet.length);
+      setRenderToilets(filCpToilet);
+    }, [toilets, setRenderToilets, type, filtering]);
 
     const handleOnClick = (point) => {
       const plat = point.lat;

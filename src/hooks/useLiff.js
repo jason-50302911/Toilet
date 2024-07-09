@@ -1,5 +1,5 @@
 import liff from "@line/liff";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 const useLiff = (inputUrl) => {
     const [liffObject, setLiffObject] = useState(null);

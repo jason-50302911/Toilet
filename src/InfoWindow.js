@@ -1,11 +1,10 @@
 import{ useStoreState, useStoreActions } from 'easy-peasy';
 import Toilet from './Toilet';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import useGetDay from './hooks/useGetDay';
 import { FaRestroom, FaAngleLeft, FaAngleDown, FaAngleRight, FaAngleUp } from 'react-icons/fa';
 import { IoNavigateSharp } from "react-icons/io5";
 import useWindowSize from './hooks/useWindowSize';
-import _ from 'lodash';
 import useLiff from './hooks/useLiff';
 
 const InfoWindow = () => {
@@ -126,7 +125,7 @@ const InfoWindow = () => {
         if (liffObject && toiletName) {
             liffObject.sendMessages([{
                 type: "text",
-                text: `廁所名稱:${toiletName}\n付款編號:3479328`,
+                text: `廁所名稱:${toiletName}\n付款編號:1242637`,
             }, ]);
             liffObject.closeWindow();
         } 
