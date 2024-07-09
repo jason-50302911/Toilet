@@ -50,10 +50,10 @@ function App() {
       <SelectForm/>
       <Map distance={distance}/>
       <Routes>
-        <Route path="/" element={<InfoWindow liffObject={liffObject}/>}/>
-        <Route path="/finding/:findMode" element={<Finding nearToilet={nearToilet} nearLoc={nearLoc} liffObject={liffObject}/>}/>
-        <Route path="/msg/:condition" element={<Selected/>}/>
-        <Route path="/place/:id" element={<InfoWindow liffObject={liffObject}/>}/>
+        <Route path="/" element={<InfoWindow/>}/>
+        <Route path="/:findmode" element={<Finding nearToilet={nearToilet} nearLoc={nearLoc}/>}/>
+        <Route path="/select/:type" element={<Selected/>}/>
+        <Route path="/place/:id" element={<InfoWindow/>}/>
         <Route path="/discuss/:id" element={<Discuss/>}/>
         <Route path="/toiletPage/:id" element={<ToiletPage/>}/>
       </Routes> 

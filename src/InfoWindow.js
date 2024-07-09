@@ -6,9 +6,9 @@ import { FaRestroom, FaAngleLeft, FaAngleDown, FaAngleRight, FaAngleUp } from 'r
 import { IoNavigateSharp } from "react-icons/io5";
 import useWindowSize from './hooks/useWindowSize';
 import _ from 'lodash';
+import useLiff from './hooks/useLiff';
 
-
-const InfoWindow = ({ liffObject }) => {
+const InfoWindow = ({ URL }) => {
     const searchResult = useStoreState((state) => state.searchResult);
     const renderToilets = useStoreState((state) => state.renderToilets);
     const clickNumber = useStoreState((state) => state.clickNumber);
@@ -29,6 +29,9 @@ const InfoWindow = ({ liffObject }) => {
     const [displayToilet, setDisplayToilet] = useState([]);
     const [navURL, setNavURL] = useState(null);
     const [patterns, setPatterns] = useState(null);
+    const [liffUrl, setLiffUrl] = useState('default');
+
+    const { liffObject } = useLiff(liffUrl);
 
     const day = useGetDay();
     const { width } = useWindowSize();
@@ -80,6 +83,10 @@ const InfoWindow = ({ liffObject }) => {
         }
     }, [displayToilet, findingSearchId]);
 
+    useEffect(() => {
+        if (URL) setLiffUrl(URL);
+    }, [URL, setLiffUrl]);
+
     const handleFloorClick = (floor) => {
         const floorLength = floorList.length;
         let newClickList = [];
@@ -111,9 +118,18 @@ const InfoWindow = ({ liffObject }) => {
             if (type.length >= 5) return;
             typeList = [...type, number];
         };
-        console.log(typeList);
         setType(typeList);
     }
+
+    const handleLiff = () => {
+        if (liffObject && toiletName) {
+            liffObject.sendMessages([{
+                type: "text",
+                text: `廁所名稱:${toiletName}\n付款編號:3479328`,
+            }, ]);
+            liffObject.closeWindow();
+        } 
+      }
 
 
     return (
@@ -128,7 +144,15 @@ const InfoWindow = ({ liffObject }) => {
                         </div>
                             <div 
                                 className="infoWindow">
+                                <div className="titleContainer">
                                 <h1>{toiletName}</h1>
+                                    {patterns === "收費廁所" && liffObject &&
+                                            <button 
+                                                className="liffBtn"
+                                                onClick={handleLiff}>點擊付費
+                                            </button>
+                                    }
+                                </div>
                                 <div className="smallWindow">
                                     <div className="infoDetails">
                                         <p>{toiletAddress}</p>
@@ -142,7 +166,8 @@ const InfoWindow = ({ liffObject }) => {
                                                     <IoNavigateSharp/> GO
                                                 </span>
                                             </a>
-                                        </button>}
+                                        </button>
+                                    }
                                 </div>
                                 <div className="floorBtnContainer">
                                     {floorList.map((floor) => (

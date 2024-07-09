@@ -186,8 +186,29 @@ body {
   background-color: hsla(0, 0%, 100%, 0.903);
 }
 
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+
 .infoWindow h1 {
   font-size: 1.55rem;
+}
+
+.liffBtn {
+  width: 80px;
+  height: 30px;
+  float: right;
+  border-radius: 10px;
+  background-color: hsl(350, 70%, 71%);
+  color: hsl(0, 0%, 96%);
+  border: none;
+  text-align: center;
+  box-shadow: 1px 1px 1px hsl(0, 0%, 39%);
+  cursor: pointer;
 }
 
 .controlWindow {
@@ -244,14 +265,6 @@ body {
   flex-direction: column;
 }
 
-.toiletWithBtn {
-  padding: 0.5rem;
-  color: whitesmoke;
-  border: 2.7px solid hsl(0, 0%, 100%);
-  border-radius: 10px;
-  align-items: center;
-}
-
 .toilet {
   width: 90%;
   padding: 0.4rem;
@@ -288,20 +301,6 @@ body {
   cursor: pointer;
 }
 
-.liffBtn {
-  width: 70px;
-  height: 25px;
-  float: right;
-  border-radius: 10px;
-  margin-left: 0.3rem; 
-  background-color: hsl(350, 70%, 71%);
-  color: hsl(0, 0%, 96%);
-  border: none;
-  text-align: center;
-  box-shadow: 1px 1px 1px hsl(0, 0%, 39%);
-  cursor: pointer;
-}
-
 .smallWindow {
   margin: 0.3rem;
   display: grid;
@@ -312,7 +311,6 @@ body {
 .infoDetails p{
   font-size: 0.67rem;
 }
-
 
 .naviBtn {
   width: 80px;

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
-const Toilet = ({ searchResult, liffObject }) => {
+const Toilet = ({ searchResult }) => {
   const [slice, setSlice] = useState(null);
   const [open, setOpen] = useState(false);
 
@@ -14,15 +14,6 @@ const Toilet = ({ searchResult, liffObject }) => {
     setSlice(sliceToilet);
   }, [searchResult, open, setSlice]);
 
-  const handleLiff = () => {
-    if (liffObject) {
-        liffObject.sendMessages([{
-            type: "text",
-            text: "Send Messages",
-        }, ]);
-        liffObject.closeWindow();
-    } 
-  }
 
   const handleClick = () =>  {
     if (!open) setOpen(true);
@@ -36,16 +27,10 @@ const Toilet = ({ searchResult, liffObject }) => {
         {slice && slice.map((toilet) => (
             <div
                 key={toilet.number} 
-                className={ toilet.patterns === "收費廁所" ? "toiletWithBtn" : "toilet" }>
+                className="toilet">
                 <Link to={`/toiletPage/${toilet.number}`}>
                     <span className="toiletActname">{toilet.actname}</span>
                 </Link>
-                {toilet.patterns === "收費廁所" &&
-                    <button 
-                      className="liffBtn"
-                      onClick={handleLiff}>點擊付費
-                    </button>
-                }
             </div>
           ))}
       </div>
