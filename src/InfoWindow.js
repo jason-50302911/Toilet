@@ -22,18 +22,16 @@ const InfoWindow = () => {
     
     const [preClickNumber, setPreClickNumber] = useState(null);
     const [clickFloor, setClickFloor] = useState([]);
+    const [info, setInfo] = useState(null);
     const [numberToilet, setNumberToilet] = useState({});
-    const [toiletName, setToiletName] = useState('');
-    const [toiletAddress, setToiletAddress] = useState('');
     const [floorList, setFloorList] = useState([]);
     const [displayToilet, setDisplayToilet] = useState([]);
     const [navURL, setNavURL] = useState(null);
-    const [patterns, setPatterns] = useState(null);
     const [liffUrl, setLiffUrl] = useState(null);
 
     const { liffObject } = useLiff(liffUrl);
 
-    const day = useGetDay();
+    const { day, hour } = useGetDay();
     const { width } = useWindowSize();
 
     const toiletType = {  1: "男廁所", 2: "女廁所",  3: "親子廁所",  4: "無障礙廁所", 5: "性別友善廁所", 6: "混合廁所"};
@@ -55,11 +53,9 @@ const InfoWindow = () => {
                     }
                 });
                 setFloorList(information.floorList.sort());
+                setInfo(information);
                 setNumberToilet(numberList); 
-                setToiletName(information.name);
-                setToiletAddress(information.address);
                 setDisplayToilet(filterToilet);
-                setPatterns(information.patterns);
                 setNavURL(`https://www.google.com/maps/dir/?api=1&origin=${orlat},${orlng}&destination=${information.lat}, ${information.lng}&travelmode=driving`);
             }
         }
@@ -86,6 +82,8 @@ const InfoWindow = () => {
         if (url === null) setLiffUrl("defalult");
         else if (url) setLiffUrl(url);
     }, [url, setLiffUrl]);
+
+
 
     const handleFloorClick = (floor) => {
         const floorLength = floorList.length;
@@ -122,15 +120,14 @@ const InfoWindow = () => {
     }
 
     const handleLiff = () => {
-        if (liffObject && toiletName) {
+        if (liffObject && info.name) {
             liffObject.sendMessages([{
                 type: "text",
-                text: `廁所名稱：${toiletName}\n付款編號：1242637`,
+                text: `廁所名稱：${info.name}\n付款編號：1242637`,
             }, ]);
             liffObject.closeWindow();
         } 
       }
-
 
     return (
         <>
@@ -145,8 +142,8 @@ const InfoWindow = () => {
                             <div 
                                 className="infoWindow">
                                 <div className="titleContainer">
-                                <h1>{toiletName}</h1>
-                                    {patterns === "收費廁所" && 
+                                    <h1>{info.name}</h1>
+                                    {info.patterns === "收費廁所" && 
                                         liffObject !== null &&
                                             <button 
                                                 className="liffBtn"
@@ -156,9 +153,9 @@ const InfoWindow = () => {
                                 </div>
                                 <div className="smallWindow">
                                     <div className="infoDetails">
-                                        <p>{toiletAddress}</p>
-                                        <p>開放時間: {week[day]}  8:00 - 17:00</p>
-                                        <p>使用模式: {patterns}</p>
+                                        <p>{info.address}</p>
+                                        {info && <p>{week[day]} - { info.time[week[day]].includes(String(hour)) ? "營業中" : "休息中"}</p>}
+                                        <p>使用模式 - {info.patterns}</p>
                                     </div>
                                     {navURL && 
                                         <button className="naviBtn">
@@ -191,6 +188,7 @@ const InfoWindow = () => {
                                 </ul>
                                 <Toilet
                                     searchResult={searchResult}
+                                    spare={info.spare}
                                     liffObject={liffObject}
                                 />
                             </div>

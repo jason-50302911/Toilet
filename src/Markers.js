@@ -34,22 +34,15 @@ const Markers = () => {
       let sortTarget = null;
       if (usingType) {
         sortCategr = usingType;
-        console.log(sortCategr);
         sortTarget = "patterns";
       }
       if (storeType) {
         sortCategr = storeType;
-        console.log(sortCategr);
         sortTarget = "type3";
       }
-      if (sortCategr && toiletList.length !== 0) {
-        console.log(1)
+      if (sortCategr && toiletList.length !== 0) 
         return toiletList.filter((toilet) => toilet[sortTarget] === sortCategr);  
-      }
-      else {
-        console.log(toiletList.length)
-        return toiletList 
-      }
+      else return toiletList;
     }, [usingType, storeType]);
 
     useEffect(() => {
@@ -65,7 +58,6 @@ const Markers = () => {
         });
       };
       const filCpToilet = filtering(cpToilet);
-      console.log(filCpToilet.length);
       setRenderToilets(filCpToilet);
     }, [toilets, setRenderToilets, type, filtering]);
 
@@ -82,7 +74,6 @@ const Markers = () => {
           map.panTo(modifyPosition);
           map.setZoom(19.5);
         }
-
         setClickNumber(point.uuid);
         setInfoWinState('idle');
       }

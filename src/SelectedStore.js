@@ -9,10 +9,9 @@ const SelectedUse = () => {
     const url = useStoreState((state) => state.url);
 
     const setUrl = useStoreActions((actions) => actions.setUrl);
-    const setStoreType = useStoreActions((actions) => actions.setUsingType);
+    const setStoreType = useStoreActions((actions) => actions.setStoreType);
 
     useEffect(() => {
-      console.log(storeType);
         if (storeType) setStoreType(storeType);
         if (!url) setUrl(storeType);
         

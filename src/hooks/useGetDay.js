@@ -2,16 +2,20 @@ import { useState, useEffect } from 'react';
 
 const useGetDay = () => {
     const [day, setDay] = useState('');
+    const [hour, setHour] = useState('');
 
     useEffect(() => {
-        const getDay = () => {
-            const now = new Date().getDay();
-            setDay(now);
+        const getDayInfo = () => {
+            const now = new Date()
+            const week = now.getDay();
+            const nowHour = now.getHours();
+            setDay(week);
+            setHour(nowHour);
         }
-        getDay();
+        getDayInfo();
     }, []);
 
-    return day;
+    return { day, hour };
 }
 
 export default useGetDay

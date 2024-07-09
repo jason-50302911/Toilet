@@ -33,8 +33,6 @@ function App() {
   
   const location = useGeoLocation();
 
-  const { liffObject } = useLiff();
-
   useEffect(() => {
     if (mode === 'detect' || mode === 'finding'){
       setNowCenter(location.coordinates);

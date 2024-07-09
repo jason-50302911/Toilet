@@ -140,27 +140,24 @@ body {
   display: none;
 }
 
-.infoContainer {
+.infoContainer, .toiletPage {
   position: absolute;
   width: 50%;
   max-width: 500px;
   height: 80%;
   bottom: 45px;
   left: 0px;
-  background-color: hsl(180, 38%, 56%);
   background-color: transparent;
 }
 
-.infoWindow, .toiletPage  {
-  display: flex;
-  flex-direction: column;
+.infoWindow  {
   z-index: 10;
   position: absolute;
   margin: 0;
   width: 100%;
   max-width: 500px;
   height: 100%;
-  bottom: 20px;
+  bottom: 0px;
   left: 0px;
   color: whitesmoke;
   background-color: hsl(180, 38%, 56%);
@@ -193,9 +190,8 @@ body {
   flex-direction: row;
 }
 
-
 .infoWindow h1 {
-  font-size: 1.55rem;
+  font-size: 1.8rem;
 }
 
 .liffBtn {
@@ -265,6 +261,10 @@ body {
   flex-direction: column;
 }
 
+.toiletList p {
+  font-size: 0.9rem;
+}
+
 .toilet {
   width: 90%;
   padding: 0.4rem;
@@ -302,7 +302,9 @@ body {
 }
 
 .smallWindow {
-  margin: 0.3rem;
+  margin-top: 0.3rem;
+  margin-left: 0.3rem;
+  margin-bottom: 0.3rem;
   display: grid;
   grid-template-columns: 6fr 1fr;
   align-items: center;
@@ -318,6 +320,7 @@ body {
   border-radius: 15px;
   border: none;
   padding: 10px;
+  margin-right: 0.3rem;
   background-color: hsl(209, 58%, 40%);
   box-shadow: 1px 1.5px 1.5px hsl(0, 0%, 39%);
 }
@@ -371,11 +374,41 @@ body {
   flex-direction: column;
 }
 
+.spareInfo {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  flex-direction: column;       
+}
+
+.spareContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  margin: 0.3rem;
+}
+
+.spareMissing {
+  font-size: 0.7rem;
+  margin-right: 0.3rem;
+}
+
+.spare {
+  margin: 0.3rem;
+  padding: 0.2rem;
+  border: 2px solid white;
+  border-radius: 10px;
+  font-size: 0.6rem;
+  color: hsl(180, 38%, 56%);
+  background-color: white;
+  font-weight: bold;
+}
+
 .detailPart {
   display: flex;
   flex-direction: row;
   padding: 0.25rem;
-  margin-top: 0.5rem;
 }
 
 .string {
@@ -544,7 +577,7 @@ body {
     border-radius: 20px 20px 0 0;
   }
 
-  .infoWindow, .toiletPage {
+  .infoWindow {
     left: 0;
     z-index: 10;
     position: absolute;
@@ -556,24 +589,9 @@ body {
     box-shadow: none;
     border-radius: none;
     background-color: hsl(180, 45%, 60%);
+    border-radius: 20px 20px 0 0;
     padding: 0 0.9rem 0.3rem 0.9rem;
   }
-
-  .toiletPage {
-    left: 0;
-    z-index: 10;
-    position: absolute;
-    width: 100%;
-    min-width: 100vw;
-    height: 51vh;
-    bottom: 0px;
-    color: hsl(0, 0%, 100%);
-    box-shadow: none;
-    border-radius: none;
-    background-color: hsl(180, 45%, 60%);
-    padding: 0.9rem;
-  }
-
 
   .infoWindow h1 {
     margin: 0.3rem;
@@ -620,6 +638,11 @@ body {
   }
 
   .infoWindow::-webkit-scrollbar-track {
+    background-color: transparent;
+    margin: 10px 0 2px 0;
+  }
+
+  .detailContainer::-webkit-scrollbar-track {
     background-color: transparent;
     margin: 10px 0 2px 0;
   }
@@ -829,5 +852,34 @@ body {
     border: none;
     cursor: pointer;
     box-shadow: 0 0 7px hsl(0, 0%, 30%);
+  }
+  
+  .detailContainer{
+    border-bottom: 2px solid white;
+    border-top:  2px solid white;
+    padding : 0.6rem 0 0.6rem 0;
+  }
+
+  .detailPart {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 0.7rem;
+    width: 100%;
+  }
+
+  .commentContainer {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+  }
+
+  .comment {
+    border: 2px solid whitesmoke;
+    border-radius: 10px;
+    width: 100%;
+    margin: 0.3rem;
   }
 }
