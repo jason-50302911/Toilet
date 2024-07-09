@@ -94,7 +94,7 @@ body {
 .yellowMarker {
   width: 35px;
   height: 35px;
-  border: 2px solid hsl(22, 100%, 35%);
+  border: 2px solid hsl(22, 80%, 54%);
   border-radius: 50%;
   background-color: hsl(40, 100%, 61%);
   display: flex;
