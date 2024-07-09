@@ -1,7 +1,7 @@
 import liff from "@line/liff";
 import { useState, useEffect } from "react";
 
-const useLiff = (URL) => {
+const useLiff = ( URL ) => {
     const [liffObject, setLiffObject] = useState(null);
     const [liffError, setLiffError] = useState(null);
 
@@ -35,6 +35,7 @@ const useLiff = (URL) => {
                 console.log(`liff init failed: ${error}`);
                 setLiffError(error.toString());
             }
+            console.log(liffObject);
         }
         initLiff();
     }, []);
