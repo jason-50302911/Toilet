@@ -6,6 +6,10 @@ const URL = process.env.REACT_APP_BACKEND_URL;
 // const URL = "http://192.168.100.169:5000"
 
 export default createStore({
+    url: null,
+    setUrl: action((state, payload) => {
+        state.url = payload;
+    }),
     toilets: [],
     setToilets: action((state, payload) => {
         state.toilets = payload;

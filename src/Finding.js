@@ -11,10 +11,14 @@ const Finding = ({ nearLoc, nearToilet }) => {
     const setClickNumber = useStoreActions((actions) => actions.setClickNumber);
     const setCenPoint = useStoreActions((actions) => actions.setCenPoint);
     const setInfoWinState = useStoreActions((actions) => actions.setInfoWinState);
+    const setUrl = useStoreActions((actions) => actions.setUrl);
 
     useEffect(() => {
-        if (findmode === "finding")  setMode("finding");
-    }, [setMode, findmode]);
+        if (findmode === "finding")  {
+            setMode("finding");
+            setUrl(findmode);
+        }
+    }, [setMode, findmode, setUrl]);
 
     useEffect(() =>{
         if (mode === "finding") {
@@ -25,7 +29,7 @@ const Finding = ({ nearLoc, nearToilet }) => {
     }, [nearToilet, nearLoc, setClickNumber, mode, setCenPoint, setInfoWinState]);
     
     return (
-        <InfoWindow URL={findmode}/>
+        <InfoWindow/>
     )
 }
 

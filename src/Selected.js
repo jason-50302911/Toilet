@@ -1,11 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useStoreActions } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import InfoWindow from "./InfoWindow";
 
 const Selected = () => {
     const { type } = useParams();
 
+    const url = useStoreState((state) => state.url);
+
+    const setUrl = useStoreActions((actions) => actions.setUrl);
     const setType = useStoreActions((actions) => actions.setType);
 
     useEffect(() => {
@@ -19,10 +22,11 @@ const Selected = () => {
             setType(numTypeList);
         }
         selectedType();
-    }, [type, setType]);
+        if (!url) setUrl(type);
+    }, [type, setType, setUrl, url]);
 
     return (
-        <InfoWindow URL={type}/>
+        <InfoWindow />
     )
 } 
 

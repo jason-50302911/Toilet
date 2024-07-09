@@ -1,12 +1,12 @@
 import liff from "@line/liff";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
-const useLiff = ( URL ) => {
+const useLiff = (inputUrl) => {
     const [liffObject, setLiffObject] = useState(null);
     const [liffError, setLiffError] = useState(null);
 
-    const desLiffID = (URL) => {
-        switch (URL) {
+    const desLiffID = (url) => {
+        switch (url) {
             case "finding":
                 return process.env.REACT_APP_FIND_LIFF_ID;
             case "男廁所":
@@ -25,20 +25,18 @@ const useLiff = ( URL ) => {
     }
 
     useEffect(() => {
-
-        const initLiff = async () => {
+        const initLiff = async (url) => {
             try {
-                await liff.init({ liffId: desLiffID(URL) });
+                await liff.init({ liffId: desLiffID(url) });
                 if (liff.isLoggedIn())setLiffObject(liff)
                 else setLiffObject(null);
             } catch (error) {
                 console.log(`liff init failed: ${error}`);
                 setLiffError(error.toString());
             }
-            console.log(liffObject);
         }
-        initLiff();
-    }, []);
+        if (inputUrl !== null && inputUrl !== undefined) initLiff(inputUrl);
+    }, [inputUrl]);
 
     return ({ liffObject, liffError });
 }

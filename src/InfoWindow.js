@@ -1,6 +1,6 @@
 import{ useStoreState, useStoreActions } from 'easy-peasy';
 import Toilet from './Toilet';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import useGetDay from './hooks/useGetDay';
 import { FaRestroom, FaAngleLeft, FaAngleDown, FaAngleRight, FaAngleUp } from 'react-icons/fa';
 import { IoNavigateSharp } from "react-icons/io5";
@@ -8,13 +8,14 @@ import useWindowSize from './hooks/useWindowSize';
 import _ from 'lodash';
 import useLiff from './hooks/useLiff';
 
-const InfoWindow = ({ URL }) => {
+const InfoWindow = () => {
     const searchResult = useStoreState((state) => state.searchResult);
     const renderToilets = useStoreState((state) => state.renderToilets);
     const clickNumber = useStoreState((state) => state.clickNumber);
     const infoWinState = useStoreState((state) => state.infoWinState);
     const initLocation = useStoreState((state) => state.initLocation);
     const type = useStoreState((state) => state.type);
+    const url = useStoreState((state) => state.url);
 
     const findingSearchId = useStoreActions((actions) => actions.findingSearchId);
     const setInfoWinState = useStoreActions((actions) => actions.setInfoWinState);
@@ -29,7 +30,7 @@ const InfoWindow = ({ URL }) => {
     const [displayToilet, setDisplayToilet] = useState([]);
     const [navURL, setNavURL] = useState(null);
     const [patterns, setPatterns] = useState(null);
-    const [liffUrl, setLiffUrl] = useState('default');
+    const [liffUrl, setLiffUrl] = useState(null);
 
     const { liffObject } = useLiff(liffUrl);
 
@@ -38,9 +39,8 @@ const InfoWindow = ({ URL }) => {
 
     const toiletType = {  1: "男廁所", 2: "女廁所",  3: "親子廁所",  4: "無障礙廁所", 5: "性別友善廁所", 6: "混合廁所"};
     const week = { 0: "星期日", 1: "星期一", 2: "星期二", 3: "星期三", 4: "星期四", 5: "星期五", 6: "星期六" };
-    
-    useEffect(() => {
 
+    useEffect(() => {
         const numberList = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
         if (clickNumber) {
             const information = renderToilets.find((toilet) => toilet.uuid === clickNumber);
@@ -84,8 +84,9 @@ const InfoWindow = ({ URL }) => {
     }, [displayToilet, findingSearchId]);
 
     useEffect(() => {
-        if (URL) setLiffUrl(URL);
-    }, [URL, setLiffUrl]);
+        if (url === null) setLiffUrl("defalult");
+        else if (url) setLiffUrl(url);
+    }, [url, setLiffUrl]);
 
     const handleFloorClick = (floor) => {
         const floorLength = floorList.length;
@@ -146,7 +147,8 @@ const InfoWindow = ({ URL }) => {
                                 className="infoWindow">
                                 <div className="titleContainer">
                                 <h1>{toiletName}</h1>
-                                    {patterns === "收費廁所" &&
+                                    {patterns === "收費廁所" && 
+                                        liffObject !== null &&
                                             <button 
                                                 className="liffBtn"
                                                 onClick={handleLiff}>點擊付費
