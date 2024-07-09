@@ -125,7 +125,7 @@ const InfoWindow = () => {
         if (liffObject && toiletName) {
             liffObject.sendMessages([{
                 type: "text",
-                text: `廁所名稱:${toiletName}\n付款編號:1242637`,
+                text: `廁所名稱：${toiletName}\n付款編號：1242637`,
             }, ]);
             liffObject.closeWindow();
         } 
