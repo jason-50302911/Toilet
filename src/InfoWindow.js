@@ -34,7 +34,7 @@ const InfoWindow = () => {
     const { day, hour } = useGetDay();
     const { width } = useWindowSize();
 
-    const toiletType = {  1: "男廁所", 2: "女廁所",  3: "親子廁所",  4: "無障礙廁所", 5: "性別友善廁所", 6: "混合廁所"};
+    // const toiletType = {  1: "男廁所", 2: "女廁所",  3: "親子廁所",  4: "無障礙廁所", 5: "性別友善廁所", 6: "混合廁所"};
     const week = { 0: "星期日", 1: "星期一", 2: "星期二", 3: "星期三", 4: "星期四", 5: "星期五", 6: "星期六" };
 
     useEffect(() => {
@@ -73,7 +73,9 @@ const InfoWindow = () => {
     useEffect(() => {
         if (displayToilet) {
             const idArray = [];
+            console.log(displayToilet);
             displayToilet.forEach((toilet) => idArray.push(toilet.id));
+            console.log(idArray);
             findingSearchId(idArray);
         }
     }, [displayToilet, findingSearchId]);
@@ -154,7 +156,7 @@ const InfoWindow = () => {
                                 <div className="smallWindow">
                                     <div className="infoDetails">
                                         <p>{info.address}</p>
-                                        {info && <p>{week[day]} - { info.time[week[day]].includes(String(hour)) ? "營業中" : "休息中"}</p>}
+                                        {info && <p>{week[day]} - { info.time[week[day]].includes(String(hour)) || info.time[week[day]].length === 0  ? "營業中" : "休息中"}</p>}
                                         <p>使用模式 - {info.patterns}</p>
                                     </div>
                                     {navURL && 
@@ -189,6 +191,7 @@ const InfoWindow = () => {
                                 <Toilet
                                     searchResult={searchResult}
                                     spare={info.spare}
+                                    facilities={info.facilities}
                                     liffObject={liffObject}
                                 />
                             </div>

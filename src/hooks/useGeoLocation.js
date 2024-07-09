@@ -19,8 +19,8 @@ const useGeoLocation = () => {
         setLocation({
             loaded: true,
             coordinates: {
-                lat: parseFloat(25.0234342234), 
-                lng: parseFloat(121.5353434343)
+                lat: parseFloat(25.05286057263348), 
+                lng: parseFloat(121.52015620282863)
             }
         });;
     }

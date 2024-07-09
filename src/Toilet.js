@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
-const Toilet = ({ searchResult, spare }) => {
+const Toilet = ({ searchResult, spare, facilities }) => {
   const [slice, setSlice] = useState(null);
   const [open, setOpen] = useState(false);
 
@@ -25,11 +25,18 @@ const Toilet = ({ searchResult, spare }) => {
       <div className="spareInfo">
         <p>備品資訊</p>
         <div className="spareContainer">
-          {spare.length !== 0 ? spare.map((thing) => (
-            <span className="spare">
-              {thing}
-            </span>
-          )): <span className="spare">尚未提供資訊</span>}
+          {typeof(spare) === "string" ? (<span className="spare">{spare}</span>)
+            : spare.length >= 1 ?  (spare.map((thing) => 
+              (<span className="spare">{thing}</span>)))
+                :(<span className="spare">尚未提供資訊</span>)}
+        </div>
+      </div>
+      <div className="spareInfo">
+        <p>設施資訊</p>
+        <div className="spareContainer">
+          {facilities.length >= 1 ?  (facilities.map((thing) => 
+              (<span className="spare">{thing}</span>)))
+                :(<span className="spare">尚未提供資訊</span>)}
         </div>
       </div>
       {slice && <div className="toiletList">
