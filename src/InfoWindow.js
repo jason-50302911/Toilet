@@ -146,7 +146,7 @@ const InfoWindow = ({ URL }) => {
                                 className="infoWindow">
                                 <div className="titleContainer">
                                 <h1>{toiletName}</h1>
-                                    {patterns === "收費廁所" && liffObject != null &&
+                                    {patterns === "收費廁所" && liffObject !== null &&
                                             <button 
                                                 className="liffBtn"
                                                 onClick={handleLiff}>點擊付費
