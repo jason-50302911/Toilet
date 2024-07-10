@@ -226,7 +226,7 @@ const InfoWindow = () => {
                                 <div className="commentContainer">
                                     <p>評論</p>
                                     <ul className="commentContent">
-                                        { clickNumber === 631 ? (goodComments.map((comment) => (
+                                        { info.name === "佐曼咖啡館" ? (goodComments.map((comment) => (
                                             <li
                                                 key={comment.name}
                                                 className="comment">
