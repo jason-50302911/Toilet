@@ -5,7 +5,6 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import useAxiosFetch from './hooks/useAxiosFetch';
 import useGeoLocation from './hooks/useGeoLocation';
-import useLiff from './hooks/useLiff';
 import InfoWindow from './InfoWindow';
 import Discuss from './Discuss';
 import Map from "./Maps";

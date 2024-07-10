@@ -7,7 +7,6 @@ import { useStoreActions } from 'easy-peasy';
 import { useStoreState } from "easy-peasy";
 import MarkerIcon from "./MarkerIcon";
 import useWindowSize from './hooks/useWindowSize';
-import { FaArrowCircleDown } from "react-icons/fa";
 import SelfPin from "./images/selfLocPin.png";
 
 const Markers = () => {

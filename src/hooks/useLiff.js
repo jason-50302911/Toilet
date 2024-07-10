@@ -19,6 +19,22 @@ const useLiff = (inputUrl) => {
                 return process.env.REACT_APP_HANDICAP_LIFF_ID;
             case "性別友善廁所":
                 return process.env.REACT_APP_FRIENDLY_LIFF_ID;
+            case "友善借用":
+                return process.env.REACT_APP_BORROW_LIFF_ID;
+            case "顧客使用":
+                return process.env.REACT_APP_CUSTOMER_LIFF_ID;
+            case "收費廁所":
+                return process.env.REACT_APP_MONEY_LIFF_ID;
+            case "開放使用":
+                return process.env.REACT_APP_OPEN_LIFF_ID;
+            case "公廁":
+                return process.env.REACT_APP_PUBLIC_LIFF_ID;
+            case "便利商店":
+                return process.env.REACT_APP_CONVENIENT_LIFF_ID;
+            case "一般商家":
+                return process.env.REACT_APP_NORNMAL_LIFF_ID;
+            case "連鎖商店":
+                return process.env.REACT_APP_CHAIN_LIFF_ID;;    
             default:
                 return process.env.REACT_APP_BASE_LIFF_ID;
         }

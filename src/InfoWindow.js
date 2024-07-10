@@ -182,6 +182,7 @@ const InfoWindow = () => {
                                         <p>{info.address}</p>
                                         {info && <p>{week[day]} - { info.time[week[day]].includes(String(hour)) || info.time[week[day]].length === 0  ? "營業中" : "休息中"}</p>}
                                         <p>使用模式 - {info.patterns}</p>
+                                        {liffObject && <p>金額 - 30元</p>}
                                     </div>
                                     {navURL && 
                                         <button className="naviBtn">
@@ -245,7 +246,7 @@ const InfoWindow = () => {
                                                 key={comment.name}
                                                 className="comment">
                                                 <div className="profile">
-                                                    <img src={Commentator2} alt="commentb" width="40" height="30"style={{"borderRadius": "50%", "marginRight": "0.3rem"}} title="commentator1"/>
+                                                    <img src={Commentator2} alt="commentb" width="30" height="30"style={{"borderRadius": "50%", "marginRight": "0.3rem"}} title="commentator1"/>
                                                     <p style={{"fontSize": "0.65rem"}}>{comment.name}</p>
                                                 </div>
                                                 <p style={{"fontSize": "0.5rem"}}>{comment.time}</p>
