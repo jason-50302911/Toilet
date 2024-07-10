@@ -1,7 +1,8 @@
 import {
     useMap,
     AdvancedMarker,
-    Pin
+    Pin,
+    CollisionBehavior
   } from "@vis.gl/react-google-maps";
 import { useCallback, useEffect } from "react";
 import { useStoreActions } from 'easy-peasy';
@@ -82,13 +83,6 @@ const Markers = () => {
         <>
           {toilets && mapCenter &&
             <div>
-              <AdvancedMarker position={{ lat: parseFloat(initLocation.lat), lng: parseFloat(initLocation.lng) }}>
-                <span className="nowLocation">
-                  <Pin background={"#FF60AF"} borderColor={"#F00078"} scale={2}>
-                    <span style={{ "fontSize": "1.4rem" }}>👀</span>
-                  </Pin> 
-                </span>
-              </AdvancedMarker>
               {renderToilets.map((point) => (
                 <AdvancedMarker
                   position={{lat: parseFloat(point.lat), lng: parseFloat(point.lng)}}
@@ -101,6 +95,15 @@ const Markers = () => {
                   </MarkerIcon>
                 </AdvancedMarker>
               ))}
+              <AdvancedMarker 
+                position={{ lat: parseFloat(initLocation.lat), lng: parseFloat(initLocation.lng) }}
+                collisionBehavior={CollisionBehavior.REQUIRED}>
+                <span className="nowLocation">
+                  <Pin background={"#FF60AF"} borderColor={"#F00078"} scale={2}>
+                    <span style={{ "fontSize": "1.4rem", "fontWeight": "bold", "color": "white" }}>EZ</span>
+                  </Pin> 
+                </span>
+              </AdvancedMarker>
             </div>
           }
         </>
