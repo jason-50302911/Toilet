@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
 const Toilet = ({ searchResult, spare, facilities }) => {
@@ -27,7 +26,7 @@ const Toilet = ({ searchResult, spare, facilities }) => {
         <div className="spareContainer">
           {typeof(spare) === "string" ? (<span className="spare">{spare}</span>)
             : spare.length >= 1 ?  (spare.map((thing) => 
-              (<span className="spare">{thing}</span>)))
+              (<span className="spare" key={thing}>{thing}</span>)))
                 :(<span className="spare">尚未提供資訊</span>)}
         </div>
       </div>
@@ -45,9 +44,10 @@ const Toilet = ({ searchResult, spare, facilities }) => {
             <div
                 key={toilet.number} 
                 className="toilet">
-                <Link to={`/toiletPage/${toilet.number}`}>
+                {/* <Link to={`/toiletPage/${toilet.number}`}>
                     <span className="toiletActname">{toilet.actname}</span>
-                </Link>
+                </Link> */}
+                <span className="toiletActname">{toilet.actname}</span>
             </div>
           ))}
       </div>}

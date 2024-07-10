@@ -2,10 +2,16 @@ import{ useStoreState, useStoreActions } from 'easy-peasy';
 import Toilet from './Toilet';
 import { useState, useEffect } from 'react';
 import useGetDay from './hooks/useGetDay';
-import { FaRestroom, FaAngleLeft, FaAngleDown, FaAngleRight, FaAngleUp } from 'react-icons/fa';
+import { FaAngleLeft, FaAngleDown, FaAngleRight, FaAngleUp } from 'react-icons/fa';
+import { MdOutlineFamilyRestroom } from "react-icons/md";
 import { IoNavigateSharp } from "react-icons/io5";
+import { FaMale, FaFemale } from "react-icons/fa";
+import { BiFemale, BiMaleFemale } from "react-icons/bi";
+import { BiHandicap } from "react-icons/bi";
 import useWindowSize from './hooks/useWindowSize';
 import useLiff from './hooks/useLiff';
+import Commentator1 from "./images/commentator.png";
+import Commentator2 from "./images/commentator1.png";
 
 const InfoWindow = () => {
     const searchResult = useStoreState((state) => state.searchResult);
@@ -36,6 +42,26 @@ const InfoWindow = () => {
 
     // const toiletType = {  1: "男廁所", 2: "女廁所",  3: "親子廁所",  4: "無障礙廁所", 5: "性別友善廁所", 6: "混合廁所"};
     const week = { 0: "星期日", 1: "星期一", 2: "星期二", 3: "星期三", 4: "星期四", 5: "星期五", 6: "星期六" };
+
+    const goodComments = [
+        { name: "陳建宏", time:"一個月前", content:"這家咖啡廳的廁所非常乾淨，裝潢也很舒適，讓人感覺很放鬆。" },
+        { name: "李雅婷", time:"一星期前", content:"廁所有充足的紙巾和洗手液，整體環境很整潔。" }, 
+        { name: "張志遠", time:"昨天", content:"廁所位置很好找，標示清晰明確。" },
+        { name: "王美玲", time:"今天", content:"廁所乾沒有味道。"},
+        { name: "林俊傑", time:"三週前", content:"廁所超乾淨令人想定居。" },
+        { name: "黃慧君", time:"三天前", content:"廁所裡卡詩擴香的芬芳。" }
+    ]
+
+    const badComments = [
+        { name: "楊宗翰", time:"四天前", content:"廁所不夠乾淨，有異味，感覺使用起來不太舒服。" },
+        { name: "鄭嘉怡", time:"兩天前", content:"地面有水漬，感覺打掃不夠及時。" },
+        { name: "吳宗憲", time:"今天", content:"沒有足夠的衛生紙和洗手液，使用起來很不方便。" },
+        { name: "蔡依林", time:"一個月前", content:"廁所門鎖壞了，使用時感覺不安全。" },
+        { name: "林育成", time:"昨天", content:"這裡的廁所經常排隊，等待時間太長了。" },
+        { name: "張欣怡", time:"五天前", content:"高峰時間使用廁所的人太多，需要等很久。" },
+        { name: "李美娟", time:"今天", content:"廁所設備看起來很舊，有些設施需要維修。" },
+        { name: "朱瑞祥", time:"昨天", content:"馬桶沖水系統不好用，需要改進。" }
+    ]
 
     useEffect(() => {
         const numberList = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
@@ -73,9 +99,7 @@ const InfoWindow = () => {
     useEffect(() => {
         if (displayToilet) {
             const idArray = [];
-            console.log(displayToilet);
             displayToilet.forEach((toilet) => idArray.push(toilet.id));
-            console.log(idArray);
             findingSearchId(idArray);
         }
     }, [displayToilet, findingSearchId]);
@@ -184,7 +208,13 @@ const InfoWindow = () => {
                                             className={ bool ? "toiletSection" : "nonToiletSection"}
                                             key={number}
                                             onClick={() => handleClick(number, bool)}>
-                                            <FaRestroom/>
+                                            {number === "1" ? (<FaMale/>):
+                                            number === "2" ?  (<FaFemale/>):
+                                                number === "3" ?  (<MdOutlineFamilyRestroom/>):
+                                                    number === "4" ?  (<BiHandicap/>):
+                                                        number === "5" ?  (<BiFemale/>):
+                                                            (<BiMaleFemale/>)
+                                        }
                                         </li>
                                     ))}
                                 </ul>
@@ -192,8 +222,40 @@ const InfoWindow = () => {
                                     searchResult={searchResult}
                                     spare={info.spare}
                                     facilities={info.facilities}
-                                    liffObject={liffObject}
-                                />
+                                    liffObject={liffObject}/>
+                                <div className="commentContainer">
+                                    <p>評論</p>
+                                    <ul className="commentContent">
+                                        { clickNumber === 631 ? (goodComments.map((comment) => (
+                                            <li
+                                                key={comment.name}
+                                                className="comment">
+                                                <div className="profile">
+                                                    <img src={Commentator1} alt="commenta" width="30" height="30" style={{"borderRadius": "50%", "marginRight": "0.3rem"}} title="commentator1"/>
+                                                    <p style={{"fontSize": "0.65rem"}}>{comment.name}</p>
+                                                </div>
+                                                <p style={{"fontSize": "0.5rem"}}>{comment.time}</p>
+                                                <div className="content">
+                                                    <p>{comment.content}</p>
+                                                </div>
+                                            </li>
+                                        ))):
+                                        (badComments.map((comment) => (
+                                            <li
+                                                key={comment.name}
+                                                className="comment">
+                                                <div className="profile">
+                                                    <img src={Commentator2} alt="commentb" width="40" height="30"style={{"borderRadius": "50%", "marginRight": "0.3rem"}} title="commentator1"/>
+                                                    <p style={{"fontSize": "0.65rem"}}>{comment.name}</p>
+                                                </div>
+                                                <p style={{"fontSize": "0.5rem"}}>{comment.time}</p>
+                                                <div className="content">
+                                                    <p>{comment.content}</p>
+                                                </div>
+                                            </li>
+                                        )))}
+                                    </ul>
+                                </div>
                             </div>
                     </div> :  
                     (<div 

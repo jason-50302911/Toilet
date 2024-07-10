@@ -381,6 +381,10 @@ body {
   flex-direction: column;       
 }
 
+.spareInfo p{
+  font-size: 0.9rem;     
+}
+
 .spareContainer {
   width: 100%;
   display: flex;
@@ -467,9 +471,9 @@ body {
   height: 3rem;
   font-size: 2rem;
   font-weight: bold;
-  color:hsl(0, 100%, 50%);
+  color: white;
   background-color: hsl(0, 100%, 76%);
-  border: 6px solid hsl(25, 63%, 48%);
+  border: 6px solid hsl(323, 63%, 48%);
   border-radius: 40%;
   transition: all 0.3s ease-out;
   cursor: pointer;
@@ -765,8 +769,9 @@ body {
     height: 50px;
     font-size: 1.5rem;
     font-weight: bold;
-    background-color: hsl(0, 100%, 76%);
-    border: none;
+    color: hsl(212, 100%, 37%);
+    background-color: white;
+    border: 3px solid hsl(233, 87%, 61%);
     border-radius: 10px;
     transition: all 0.3s ease-out;
     cursor: pointer;
@@ -783,7 +788,7 @@ body {
     font-size: 1.5rem;
     font-weight: bold;
     background-color: hsl(212, 100%, 37%);
-    border: 3px solid hsl(242, 100%, 72%);
+    border: 3px solid hsl(233, 83%, 68%);
     border-radius: 40%;
     transition: all 0.3s ease-out;
     cursor: pointer;
@@ -870,16 +875,36 @@ body {
     width: 100%;
   }
 
+  .commentContent {
+    display: flex;
+    flex-direction: column;
+  }
+
   .commentContainer {
     display: flex;
     flex-direction: column;
-    list-style: none;
   }
 
   .comment {
     border: 2px solid whitesmoke;
     border-radius: 10px;
+    min-height: 70px;
+    padding: 0.6rem;
     width: 100%;
     margin: 0.3rem;
+    list-style-type: none;
+    font-size: 0.7rem;
+  }
+
+  .profile {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 0.2rem;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: flex-end;
   }
 }
