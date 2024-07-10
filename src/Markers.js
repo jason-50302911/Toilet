@@ -84,11 +84,9 @@ const Markers = () => {
             <div>
               <AdvancedMarker position={{ lat: parseFloat(initLocation.lat), lng: parseFloat(initLocation.lng) }}>
                 <span className="nowLocation">
-                <Pin
-                  background={"grey"}
-                  borderColor={"green"}
-                  glyphColor={"purple"}
-                />  
+                  <Pin background={"#FF60AF"} borderColor={"#F00078"} scale={2}>
+                    <span style={{ "fontSize": "1.4rem" }}>👀</span>
+                  </Pin> 
                 </span>
               </AdvancedMarker>
               {renderToilets.map((point) => (
