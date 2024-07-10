@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PictureCoffee from "./images/佐曼.png";
 
 const Toilet = ({ searchResult, spare, facilities }) => {
   const [slice, setSlice] = useState(null);
@@ -40,16 +41,23 @@ const Toilet = ({ searchResult, spare, facilities }) => {
       </div>
       {slice && <div className="toiletList">
         <p>樓層資訊</p>
-        {slice.map((toilet) => (
-            <div
-                key={toilet.number} 
-                className="toilet">
-                {/* <Link to={`/toiletPage/${toilet.number}`}>
-                    <span className="toiletActname">{toilet.actname}</span>
-                </Link> */}
-                <span className="toiletActname">{toilet.actname}</span>
+          {slice.map((toilet) => (
+              <div
+                  key={toilet.number} 
+                  className="toilet">
+                  {/* <Link to={`/toiletPage/${toilet.number}`}>
+                      <span className="toiletActname">{toilet.actname}</span>
+                  </Link> */}
+                  <span className="toiletActname">{toilet.actname}</span>
+              </div>
+            ))}
+         <div className="pictureInfo">
+            <p style={{ "fontSize": "0.9rem" }}>照片</p>
+            <div className="pictureContainer">
+            <img src={PictureCoffee} alt="" width="150" 
+              height="200" title="picture" style={{ "borderRadius": "10%"}}/>
             </div>
-          ))}
+        </div>
       </div>}
       {searchResult.length > 2 && <button className="toiletLookBtn" onClick={handleClick}>{open ? "Close" : "More"}</button>}
     </div>
