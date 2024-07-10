@@ -51,7 +51,7 @@ const Toilet = ({ searchResult, spare, facilities }) => {
             </div>
           ))}
       </div>}
-      {searchResult.length > 2 && <button className="toiletLookBtn" onClick={handleClick}>More</button>}
+      {searchResult.length > 2 && <button className="toiletLookBtn" onClick={handleClick}>{open ? "More" : "Close"}</button>}
     </div>
   )
 }
