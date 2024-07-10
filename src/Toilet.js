@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import PictureCoffee from "./images/佐曼.png";
 
-const Toilet = ({ searchResult, spare, facilities }) => {
+const Toilet = ({ searchResult, spare, facilities, name }) => {
   const [slice, setSlice] = useState(null);
   const [open, setOpen] = useState(false);
 
@@ -51,13 +51,13 @@ const Toilet = ({ searchResult, spare, facilities }) => {
                   <span className="toiletActname">{toilet.actname}</span>
               </div>
             ))}
-         <div className="pictureInfo">
+         {name === "佐曼咖啡館" && <div className="pictureInfo">
             <p style={{ "fontSize": "0.9rem" }}>照片</p>
             <div className="pictureContainer">
             <img src={PictureCoffee} alt="" width="150" 
               height="200" title="picture" style={{ "borderRadius": "10%"}}/>
             </div>
-        </div>
+        </div>}
       </div>}
       {searchResult.length > 2 && <button className="toiletLookBtn" onClick={handleClick}>{open ? "Close" : "More"}</button>}
     </div>

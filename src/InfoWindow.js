@@ -217,11 +217,12 @@ const InfoWindow = () => {
                                         </li>
                                     ))}
                                 </ul>
-                                <Toilet
+                                {info.name && <Toilet
                                     searchResult={searchResult}
                                     spare={info.spare}
                                     facilities={info.facilities}
-                                    liffObject={liffObject}/>
+                                    name={info.name}
+                                    liffObject={liffObject}/>}
                                 <div className="commentContainer">
                                     <p>評論</p>
                                     <ul className="commentContent">
