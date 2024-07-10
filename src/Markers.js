@@ -1,13 +1,13 @@
 import {
     useMap,
-    AdvancedMarker
+    AdvancedMarker,
+    Pin
   } from "@vis.gl/react-google-maps";
 import { useCallback, useEffect } from "react";
 import { useStoreActions } from 'easy-peasy';
 import { useStoreState } from "easy-peasy";
 import MarkerIcon from "./MarkerIcon";
 import useWindowSize from './hooks/useWindowSize';
-import SelfPin from "./images/selfLocPin.png";
 
 const Markers = () => {
     const map = useMap();
@@ -84,8 +84,11 @@ const Markers = () => {
             <div>
               <AdvancedMarker position={{ lat: parseFloat(initLocation.lat), lng: parseFloat(initLocation.lng) }}>
                 <span className="nowLocation">
-                  <img src={SelfPin}
-                          alt="smallogo" width="46.08" height="57.96" title="Logo"/>
+                <Pin
+                  background={"grey"}
+                  borderColor={"green"}
+                  glyphColor={"purple"}
+                />  
                 </span>
               </AdvancedMarker>
               {renderToilets.map((point) => (

@@ -10,8 +10,6 @@ import { BiFemale, BiMaleFemale } from "react-icons/bi";
 import { BiHandicap } from "react-icons/bi";
 import useWindowSize from './hooks/useWindowSize';
 import useLiff from './hooks/useLiff';
-import Commentator1 from "./images/commentator.png";
-import Commentator2 from "./images/commentator1.png";
 
 const InfoWindow = () => {
     const searchResult = useStoreState((state) => state.searchResult);
@@ -232,7 +230,7 @@ const InfoWindow = () => {
                                                 key={comment.name}
                                                 className="comment">
                                                 <div className="profile">
-                                                    <img src={Commentator1} alt="commenta" width="30" height="30" style={{"borderRadius": "50%", "marginRight": "0.3rem"}} title="commentator1"/>
+                                                    <img src="https://imgur.com/2ktIXy5.jpg" alt="commenta" width="30" height="30" style={{"borderRadius": "50%", "marginRight": "0.3rem"}} title="commentator1"/>
                                                     <p style={{"fontSize": "0.65rem"}}>{comment.name}</p>
                                                 </div>
                                                 <p style={{"fontSize": "0.5rem"}}>{comment.time}</p>
@@ -246,7 +244,7 @@ const InfoWindow = () => {
                                                 key={comment.name}
                                                 className="comment">
                                                 <div className="profile">
-                                                    <img src={Commentator2} alt="commentb" width="30" height="30"style={{"borderRadius": "50%", "marginRight": "0.3rem"}} title="commentator1"/>
+                                                    <img src="https://imgur.com/2ktIXy5.jpg" alt="commentb" width="30" height="30"style={{"borderRadius": "50%", "marginRight": "0.3rem"}} title="commentator1"/>
                                                     <p style={{"fontSize": "0.65rem"}}>{comment.name}</p>
                                                 </div>
                                                 <p style={{"fontSize": "0.5rem"}}>{comment.time}</p>
