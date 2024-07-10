@@ -769,9 +769,9 @@ body {
     height: 50px;
     font-size: 1.5rem;
     font-weight: bold;
-    color: hsl(212, 100%, 37%);
-    background-color: white;
-    border: 3px solid hsl(233, 87%, 61%);
+    color: white;
+    background-color: hsl(180, 38%, 56%);
+    border: 3px solid #22527f;
     border-radius: 10px;
     transition: all 0.3s ease-out;
     cursor: pointer;
@@ -787,8 +787,8 @@ body {
     color: whitesmoke;
     font-size: 1.5rem;
     font-weight: bold;
-    background-color: hsl(212, 100%, 37%);
-    border: 3px solid hsl(233, 83%, 68%);
+    background-color: #22527f;
+    border: 3px solid hsl(180, 38%, 56%);
     border-radius: 40%;
     transition: all 0.3s ease-out;
     cursor: pointer;

@@ -182,7 +182,7 @@ const InfoWindow = () => {
                                         <p>{info.address}</p>
                                         {info && <p>{week[day]} - { info.time[week[day]].includes(String(hour)) || info.time[week[day]].length === 0  ? "營業中" : "休息中"}</p>}
                                         <p>使用模式 - {info.patterns}</p>
-                                        {liffObject && <p>金額 - 30元</p>}
+                                        {info.patterns === "收費廁所" && <p>金額 - 30元</p>}
                                     </div>
                                     {navURL && 
                                         <button className="naviBtn">
