@@ -85,6 +85,8 @@ const InfoWindow = () => {
         }
     }, [renderToilets, clickNumber, clickFloor, initLocation, setInfoWinState]);
 
+    const usere = "df"
+
     useEffect(() => {
         if(clickNumber) setPreClickNumber(clickNumber);
         if (preClickNumber && preClickNumber !== clickNumber) {
